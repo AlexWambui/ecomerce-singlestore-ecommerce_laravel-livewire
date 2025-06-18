@@ -14,6 +14,10 @@ return [
     */
 
     'name' => env('APP_NAME', 'Aaqil Ecommerce'),
+    'email' => "alexaaqil.se@gmail.com",
+    'phone_number' => "+254 746 055 487",
+    'address' => "Harvest Hill Plaza, Ruii, Kiambu",
+    'location' => "Kiambu, Kenya",
 
     /*
     |--------------------------------------------------------------------------

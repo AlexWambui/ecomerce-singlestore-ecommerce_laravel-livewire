@@ -26,6 +26,8 @@
         @stack('head')
     </head>
     <body class="font-sans antialiased bg-white text-gray-900">
+        <livewire:partials.app-navbar />
+
         <div class="app_layout">
             {{-- Page Content --}}
             {{ $slot ?? '' }}

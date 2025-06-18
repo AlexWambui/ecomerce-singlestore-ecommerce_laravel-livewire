@@ -26,11 +26,15 @@
         @stack('head')
     </head>
     <body class="font-sans antialiased bg-white text-gray-900">
+        <livewire:partials.navbar />
+
         <div class="guest_layout">
             {{-- Page Content --}}
             {{ $slot ?? '' }}
             @yield('content')
         </div>
+
+        <livewire:partials.footer />
 
         {{-- Livewire --}}
         @livewireScripts
