@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Aaqil Ecommerce'),
+    'slogan' => "Best Products in Nairobi, Kenya",
     'email' => "alexaaqil.se@gmail.com",
     'phone_number' => "+254 746 055 487",
     'address' => "Harvest Hill Plaza, Ruii, Kiambu",

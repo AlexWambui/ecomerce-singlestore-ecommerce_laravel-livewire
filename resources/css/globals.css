@@ -1,0 +1,11 @@
+@import "./tailwind-utilities.css";
+
+.image,
+img {
+    @apply rounded-lg;
+}
+.image {
+    img {
+        @apply object-cover w-full h-full;
+    }
+}

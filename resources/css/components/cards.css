@@ -1,0 +1,28 @@
+.custom_cards {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8;
+
+    .card {
+        @apply rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow duration-300 p-2;
+
+        .image {
+            @apply h-[300px];
+        }
+
+        .content {
+            @apply mt-4 space-y-2;
+
+            .title {
+                @apply font-semibold;
+            }
+
+            .price_range,
+            a {
+                @apply text-gray-500;
+            }
+
+            a {
+                @apply hover:text-gray-900 hover:underline hover:decoration-solid transition duration-300;
+            }
+        }
+    }
+}

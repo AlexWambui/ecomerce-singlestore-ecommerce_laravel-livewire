@@ -1,0 +1,29 @@
+.Users {
+    .container {
+        .header {
+            @apply flex items-center justify-between py-4;
+        }
+
+        .users {
+            @apply grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 gap-4;
+
+            .user {
+                @apply bg-gray-50 p-4 rounded-lg;
+
+                .details {
+                    .info {
+                        @apply flex flex-col gap-1 items-center;
+
+                        h3 {
+                            @apply text-lg font-semibold;
+                        }
+                    }
+                }
+
+                .actions {
+                   @apply flex items-center justify-between mt-6;
+                }
+            }
+        }
+    }
+}

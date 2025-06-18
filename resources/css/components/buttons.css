@@ -1,0 +1,41 @@
+button,
+.custom_form button,
+.btn,
+a.btn {
+    @apply bg-gray-900 text-white tracking-wide py-2 px-4 rounded-sm cursor-pointer;
+}
+
+.buttons_group {
+    @apply flex items-center gap-8 mt-4;
+}
+
+.actions {
+    @apply flex items-end justify-between mt-4;
+
+    .crud {
+         @apply flex items-center space-x-2;
+    }
+ }
+
+.crud {
+    @apply flex items-center justify-between gap-8 mt-4;
+
+    .buttons_group {
+        @apply mt-0 gap-6;
+
+        button {
+            @apply py-1 px-1 text-sm;
+        }
+    }
+}
+
+button.btn_transparent,
+a.btn_transparent {
+    @apply bg-transparent text-gray-900 border border-gray-900;
+}
+
+.btn_danger,
+button.btn_danger,
+a.btn_danger {
+    @apply bg-red-600;
+}

@@ -1,7 +1,12 @@
-@import "./tailwind-utilities.css";
+@import "./globals.css";
 
 .app_layout {
     .container {
-        @@apply min-w-full px-4 py-2 mx-auto;
+        @apply min-w-full px-4 py-2 mx-auto;
     }
 }
+
+@import "./partials/app-navbar.css";
+
+@import "./pages/Dashboard.css";
+@import "./pages/Users.css";
