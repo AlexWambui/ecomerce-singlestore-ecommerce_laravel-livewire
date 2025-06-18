@@ -1,0 +1,7 @@
+@import "./tailwind-utilities.css";
+
+.app_layout {
+    .container {
+        @apply px-4 md:px-16 py-6 mx-auto;
+    }
+}

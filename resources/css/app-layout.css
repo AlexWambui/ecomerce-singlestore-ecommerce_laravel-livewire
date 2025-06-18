@@ -1,0 +1,7 @@
+@import "./tailwind-utilities.css";
+
+.app_layout {
+    .container {
+        @@apply min-w-full px-4 py-2 mx-auto;
+    }
+}
