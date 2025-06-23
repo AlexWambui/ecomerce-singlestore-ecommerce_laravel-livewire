@@ -26,17 +26,21 @@
             <label for="role" class="required">Role</label>
             <select wire:model="role" id="role">
                 <option value="">Select a role</option>
-                @foreach(\App\Enums\USER_ROLES::labels() as $value => $label)
-                    <option value="{{ $value }}" {{ $value == \App\Enums\USER_ROLES::USER->value ? 'selected' : '' }}>
-                        {{ $label }}
-                    </option>
+                @php
+                    use \App\Enums\USER_ROLES;
+                    $labels = auth()->user()->role === USER_ROLES::SUPER_ADMIN->value
+                        ? USER_ROLES::labels()
+                        : USER_ROLES::adminLabels();
+                @endphp
+                @foreach($labels as $value => $label)
+                    <option value="{{ $value }}">{{ $label }}</option>
                 @endforeach
             </select>
             <x-form-input-error field="role" />
         </div>
 
         <div class="inputs">
-            <label for="password">{{ $user_id ? 'New Password' : 'Password' }}</label>
+            <label for="password" class="required">{{ $user_id ? 'New Password' : 'Password' }}</label>
             <input type="password" wire:model="password" id="password" autocomplete="new-password">
             @if($user_id)
                 <small class="text-gray-500 text-sm">Leave blank to keep current password</small>
@@ -45,7 +49,7 @@
         </div>
 
         <div class="inputs">
-            <label for="password_confirmation">{{ $user_id ? 'Confirm New Password' : 'Confirm Password' }}</label>
+            <label for="password_confirmation" class="required">{{ $user_id ? 'Confirm New Password' : 'Confirm Password' }}</label>
             <input type="password" wire:model="password_confirmation" id="password_confirmation" autocomplete="new-password">
             <x-form-input-error field="password_confirmation" />
         </div>
