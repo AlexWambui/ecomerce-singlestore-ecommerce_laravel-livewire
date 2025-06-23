@@ -19,11 +19,27 @@ enum USER_ROLES: int
         };
     }
 
-    public function labels(): array
+    public static function labels(): array
     {
         $labels = [];
 
         foreach (self::cases() as $role) {
+            $labels[$role->value] = $role->label();
+        }
+
+        return $labels;
+    }
+
+    public static function adminLabels(): array
+    {
+        $allowed_roles = [
+            self::ADMIN,
+            self::CUSTOMER,
+        ];
+
+        $labels = [];
+
+        foreach ($allowed_roles as $role) {
             $labels[$role->value] = $role->label();
         }
 

@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Traits\UserRoleScopes;
 use App\Enums\USER_ROLES;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -13,7 +14,7 @@ use Illuminate\Support\Str;
 class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, UserRoleScopes;
 
     /**
      * The attributes that are mass assignable.
@@ -80,6 +81,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->status === true;
     }
 
+    public function getStatusLabelAttribute(): string
+    {
+        return $this->status ? 'Active' : 'Inactive';
+    }
+
     public function isSuperAdmin(): bool
     {
         return $this->role === USER_ROLES::SUPER_ADMIN;
@@ -123,6 +129,7 @@ class User extends Authenticatable implements MustVerifyEmail
         // $formatted_phone_numbers = array_map($format_phone_number, $phone_numbers);
 
         // return $formatted_phone_numbers ? implode(' | ', $formatted_phone_numbers) : '-';
-        return "{$this->phone_number} | {$this->secondary_phone_number}";
+
+        return $this->secondary_phone_number ? "{$this->phone_number} | {$this->secondary_phone_number}" : "{$this->phone_number}";
     }
 }
