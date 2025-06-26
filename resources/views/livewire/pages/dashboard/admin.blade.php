@@ -83,39 +83,41 @@
     </section>
 </div>
 
-<x-slot name="scripts">
+@push("scripts")
     <script src="{{ asset('assets/js/chart.js') }}"></script>
     <script>
+    function renderSalesChart(data) {
         const ctx = document.getElementById('salesChart');
+        if (!ctx) return;
         new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                datasets: [
-                    {
-                        label: 'Sales Amount',
-                        data: {!! json_encode($sales_data) !!},
-                        borderWidth: 1,
-                        borderRadius: 2,
-                    }
-                ]
+                datasets: [{
+                    label: 'Sales Amount',
+                    data: data,
+                    borderWidth: 1,
+                    borderRadius: 2,
+                    backgroundColor: '#3b82f6',
+                }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: true,
             }
         });
+    }
 
-
-
-        const cities = document.getElementById('citiesChart');
-        new Chart(cities, {
+    function renderCitiesChart(labels, data) {
+        const ctx = document.getElementById('citiesChart');
+        if (!ctx) return;
+        new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: {!! json_encode($locations_labels) !!},
+                labels: labels,
                 datasets: [{
                     label: 'Orders',
-                    data: {!! json_encode($locations_orders) !!},
+                    data: data,
                     backgroundColor: [
                         '#3b82f6', '#6366f1', '#10b981', '#f59e0b',
                         '#ef4444', '#8b5cf6', '#ec4899', '#14b8a6'
@@ -132,5 +134,21 @@
                 }
             }
         });
-    </script>
-</x-slot>
+    }
+
+    // Boot the charts initially (for fresh loads)
+    document.addEventListener('DOMContentLoaded', function () {
+        renderSalesChart(@json($sales_data));
+        renderCitiesChart(@json($locations_labels), @json($locations_orders));
+    });
+
+    // Reboot the charts after wire:navigate
+    document.addEventListener('livewire:navigated', function () {
+        setTimeout(() => {
+            renderSalesChart(@json($sales_data));
+            renderCitiesChart(@json($locations_labels), @json($locations_orders));
+        }, 50);
+    });
+</script>
+
+@endpush
