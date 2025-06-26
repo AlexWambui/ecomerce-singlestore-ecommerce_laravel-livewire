@@ -1,3 +1,16 @@
+# TODOs
+
+# Features
+- Users
+- Products
+- Product Categories
+- Product Ratings
+- Sales
+- Delivery Locations
+- Delivery Areas
+- Blogs
+- Contact Messages
+
 # DB DESIGN
 ```
 users {
