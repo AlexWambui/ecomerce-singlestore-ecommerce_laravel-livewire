@@ -83,7 +83,7 @@ class Index extends Component
 
         return view('livewire.pages.users.index', [
             'users' => $users,
-            'count_users' => User::count(),
+            'count_users' => User::where('role', !USER_ROLES::SUPER_ADMIN)->count(),
             'count_super_admins' => User::where('role', USER_ROLES::SUPER_ADMIN->value)->count(),
             'count_admins' => User::where('role', USER_ROLES::ADMIN->value)->count(),
             'count_owners' => User::where('role', USER_ROLES::OWNER->value)->count(),
