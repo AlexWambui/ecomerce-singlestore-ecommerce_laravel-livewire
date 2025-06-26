@@ -1,7 +1,7 @@
 .Dashboard {
     .stats {
         .stat {
-            @apply flex flex-col py-4 px-6 rounded-lg bg-blue-100;
+            @apply flex flex-col py-4 px-6 rounded-lg bg-blue-50;
 
             p:first-of-type {
                 @apply text-xl font-semibold tracking-wider;
