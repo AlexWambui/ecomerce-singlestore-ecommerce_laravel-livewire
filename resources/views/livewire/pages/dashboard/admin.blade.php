@@ -35,8 +35,8 @@
                 </div>
 
                 <div class="stat">
-                    <p>001</p>
-                    <p>Messages</p>
+                    <p>{{ $count_messages }}</p>
+                    <p>{{ Str::plural('Messages', $count_messages) }} & {{ $count_unread_messages }} Unread</p>
                 </div>
             </div>
         </div>

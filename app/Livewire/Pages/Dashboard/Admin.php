@@ -4,6 +4,7 @@ namespace App\Livewire\Pages\Dashboard;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\ContactMessage;
 use App\Enums\USER_ROLES;
 use Carbon\Carbon;
 
@@ -14,6 +15,9 @@ class Admin extends Component
         $count_super_admins = User::where('role', USER_ROLES::SUPER_ADMIN)->count();
         $count_admins = User::where('role', USER_ROLES::ADMIN)->count();
         $count_users = User::where('role', !USER_ROLES::SUPER_ADMIN)->count();
+
+        $count_messages = ContactMessage::count();
+        $count_unread_messages = ContactMessage::where('is_read', false)->count();
 
         // $gross_sales = Sale::sum('total_amount');
         // $net_sales = Sale::sum('total_amount') - Sale::sum('discount');
@@ -100,6 +104,9 @@ class Admin extends Component
             'count_super_admins',
             'count_admins',
             'count_users',
+
+            'count_messages',
+            'count_unread_messages',
 
             'gross_sales',
             'net_sales',
