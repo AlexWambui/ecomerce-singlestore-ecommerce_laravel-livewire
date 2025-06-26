@@ -22,7 +22,7 @@
                     <a href="{{ Route::has('about-page') ? route('about-page') : '#' }}" wire:navigate>About</a>
                     <a href="{{ Route::has('about-page') ? route('about-page') : '#' }}" wire:navigate>Packages</a>
                     <a href="{{ Route::has('about-page') ? route('about-page') : '#' }}" wire:navigate>Tours</a>
-                    <a href="{{ Route::has('contact-page') ? route('about-page') : '#' }}" wire:navigate>Contact</a>
+                    <a href="{{ Route::has('contact-page') ? route('contact-page') : '#' }}" wire:navigate>Contact</a>
                 </div>
             </div>
 

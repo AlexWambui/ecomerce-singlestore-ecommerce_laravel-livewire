@@ -1,12 +1,16 @@
 button,
-.custom_form button,
-.btn,
 a.btn {
-    @apply bg-gray-900 text-white tracking-wide py-2 px-4 rounded-sm cursor-pointer;
+    @apply cursor-pointer;
 }
 
 .buttons_group {
     @apply flex items-center gap-8 mt-4;
+}
+
+.custom_form button,
+.btn,
+a.btn {
+    @apply bg-gray-900 text-white tracking-wide py-2 px-4 rounded-sm;
 }
 
 .actions {

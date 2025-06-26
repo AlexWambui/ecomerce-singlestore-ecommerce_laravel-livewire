@@ -28,6 +28,8 @@
     <body class="font-sans antialiased bg-white text-gray-900">
         <livewire:partials.navbar />
 
+        <livewire:partials.flash-messages />
+
         <div class="guest_layout">
             {{-- Page Content --}}
             {{ $slot ?? '' }}

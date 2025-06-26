@@ -13,9 +13,11 @@
                 }
 
                 .stats {
-                    @apply flex items-center gap-2 text-sm text-gray-600;
+                    @apply flex items-center gap-2;
 
                     span {
+                        @apply text-sm text-gray-600;
+
                         &:not(:last-child) {
                             @apply after:content-['|'] after:ml-2;
                         }
@@ -74,6 +76,7 @@
 @import "./components/forms.css";
 @import "./components/buttons.css";
 @import "./components/cards.css";
+@import "./components/tables.css";
 
 @import "./partials/app-navbar.css";
 
