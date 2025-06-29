@@ -26,3 +26,41 @@
         }
     }
 }
+
+.small_cards {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8;
+
+    .card {
+        @apply rounded-lg bg-white shadow-sm hover:shadow-md transition-shadow duration-300 p-2;
+
+        .details {
+            @apply flex gap-6;
+
+            .info {
+                @apply space-y-1;
+
+                h3 {
+                    @apply text-lg font-semibold;
+                }
+            }
+
+            .image {
+                @apply h-20 w-20;
+
+                img {
+                    @apply rounded-lg;
+                }
+
+                span {
+                    @apply bg-gray-200 text-lg text-gray-700 rounded-lg w-20 h-20 flex items-center justify-center font-semibold uppercase;
+                }
+            }
+        }
+
+        .actions {
+            .crud {
+                @apply mt-0 gap-2;
+            }
+        }
+    }
+}

@@ -62,7 +62,7 @@ blog_categories {
     id();
     uuid('uuid')->unique();
     string('title')->unique();
-    string('slug')->index();
+    string('slug')->unique();
     string('description')->nullable();
     string('image')->nullable();
     timestamps();
@@ -72,16 +72,42 @@ blogs {
     id();
     uuid('uuid')->unique();
     string('title')->unique();
-    string('slug')->index();
+    string('slug')->unique();
     text('content')->nullable();
+    text('excerpt')->nullable(); // Short summary for cards, lists, SEO
     string('image')->nullable();
-    string('meta_title')->nullable();
-    string('meta_description', 500)->nullable();
+    json('tags')->nullable();
+
+    $table->boolean('is_featured')->default(false);
+    boolean('is_published')->default(true);
+    dateTime('published_at')->nullable();
+    boolean('noindex')->default(false);
+    boolean('nofollow')->default(false);
+
+    $table->unsignedInteger('reading_time')->nullable();
+    unsignedInteger('word_count')->nullable();
+
+    $table->string('meta_title')->nullable(); // < 60 chars
+    string('meta_description', 500)->nullable(); // < 155 chars
+    string('meta_keywords')->nullable();
     string('canonical_url')->nullable();
     json('meta_tags')->nullable();
     json('og_tags')->nullable();
+    json('structured_data')->nullable(); // to store dynamic BlogPosting schema or other types, then render directly in Blade views.
 
     foreignId('blog_category_id')->nullable()->constrained('blog_categories')->nullOnDelete();
+    foreignId('author_id')->nullable()->constrained('users')->nullOnDelete();
+    timestamps();
+}
+
+blog_comments {
+    id();
+    uuid('uuid')->unique();
+    text('content');
+    boolean('is_visible')->default(true);
+
+    foreignId('user_id')->constrained('users')->cascadeOnDelete();
+    foreignId('blog_id')->constrained('blogs')->cascadeOnDelete();
     timestamps();
 }
 
@@ -89,7 +115,7 @@ delivery_locations {
     id();
     uuid('uuid')->unique();
     string('title')->unique();
-    string('slug')->index();
+    string('slug')->unique();
     timestamps();
 }
 
@@ -97,7 +123,7 @@ delivery_areas {
     id();
     uuid('uuid')->unique();
     string('title')->unique();
-    string('slug')->index();
+    string('slug')->unique();
     decimal('price', 10, 2)->default(0.00);
 
     foreignId('delivery_location_id')->constrained('delivery_locations')->cascadeOnDelete();
@@ -107,7 +133,7 @@ product_categories {
     id();
     uuid('uuid')->unique();
     string('title')->unique();
-    string('slug')->index();
+    string('slug')->unique();
     string('description')->nullable();
     string('image')->nullable();
     timestamps();
@@ -117,7 +143,7 @@ products {
     id();
     uuid('uuid')->unique();
     string('title')->unique();
-    string('slug')->index();
+    string('slug')->unique();
     string('product_code')->nullable();
     string('sku')->unique();
     string('barcode')->nullable();
@@ -381,33 +407,6 @@ product_tag_pivot {
 }
 
 
-
-blogs {
-    // Existing fields...
-    string('meta_title')->nullable();
-    string('meta_description')->nullable();
-    string('meta_keywords')->nullable();
-    string('excerpt')->nullable();
-    boolean('is_featured')->default(false);
-    boolean('is_published')->default(true);
-    dateTime('published_at')->nullable();
-    foreignId('author_id')->constrained('users');
-    string('seo_title')->nullable();
-    string('seo_slug')->nullable();
-    json('tags')->nullable();
-}
-
-// New table for blog comments
-blog_comments {
-    id();
-    uuid('uuid')->unique();
-    text('content');
-    boolean('is_approved')->default(false);
-    foreignId('user_id')->constrained('users')->cascadeOnDelete();
-    foreignId('blog_id')->constrained('blogs')->cascadeOnDelete();
-    foreignId('parent_id')->nullable()->constrained('blog_comments')->nullOnDelete();
-    timestamps();
-}
 
 // New inventory table
 inventory {
