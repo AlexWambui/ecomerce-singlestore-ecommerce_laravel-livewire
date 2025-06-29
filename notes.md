@@ -1,4 +1,8 @@
 # TODOs
+- edit form for contact messages.
+- update is_read to true when navigated to edit contact message.
+- ui style for read messages.
+- start infront of message if marked as important.
 
 # Features
 - Users
@@ -47,9 +51,10 @@ contact_messages {
     string('email');
     string('phone_number');
     string('message', 2000);
+    string('response', 2000)->nullable();
+    string('notes')->nullable();
     boolean('is_read')->default(0);
     boolean('is_important')->default(0);
-    string('notes')->nullable();
     timestamps();
 }
 
