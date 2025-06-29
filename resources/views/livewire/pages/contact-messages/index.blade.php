@@ -54,8 +54,9 @@
                         @forelse($messages as $message)
                             <tr class="{{ $message->is_not_read ? 'unread' : 'read' }}">
                                 <td class="numbering">
-                                    <span>
-                                        <x-svgs.star class="w-2 h-2 text-gray-400 {{ $message->is_important == 1 ? 'text-yellow-400' : '' }}" />
+                                    <span class="important_message">
+                                        <x-svgs.star @class([ $message->is_important ? 'text-orange-400' : '' ])
+                                        />
                                     </span>
                                 </td>
                                 <td>{{ $message->name }}</td>

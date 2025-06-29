@@ -7,6 +7,12 @@
         @apply text-yellow-400 font-bold;
     }
 
+    .important_message {
+        svg {
+            @apply w-4 h-4;
+        }
+    }
+
     .contact_message {
         @apply bg-slate-100;
 
