@@ -5,7 +5,7 @@
                 <h2>Messages</h2>
                 <div class="stats">
                     <span>{{ $count_messages }} {{ Str::plural('message', $count_messages) }}</span>
-                    <span>{{ $count_read }} read</span>
+                    <span>{{ $count_unread }} unread</span>
                     <span>{{ $count_important }} important</span>
                 </div>
             </div>
@@ -45,31 +45,30 @@
                             <th>Email</th>
                             <th>Phone Number</th>
                             <th>Message</th>
+                            <th>Date</th>
                             <th class="action">Actions</th>
                         </tr>
                     </thead>
 
                     <tbody>
                         @forelse($messages as $message)
-                            <tr>
-                                <td class="numbering">{{ $loop->iteration }}</td>
+                            <tr class="{{ $message->is_not_read ? 'unread' : 'read' }}">
+                                <td class="numbering">
+                                    <span>
+                                        <x-svgs.star class="w-2 h-2 text-gray-400 {{ $message->is_important == 1 ? 'text-yellow-400' : '' }}" />
+                                    </span>
+                                </td>
                                 <td>{{ $message->name }}</td>
                                 <td>{{ $message->email }}</td>
                                 <td>{{ $message->phone_number }}</td>
-                                <td>{{ Str::words($message->message, 5, '...') }}</td>
+                                <td>{{ Str::words($message->message, 8, '...') }}</td>
+                                <td>{{ $message->created_at->format('d/m/Y') }}</td>
                                 <td class="actions">
                                     <div class="action">
-                                        <a href="{{ Route::has('messages.edit') ? route('messages.edit', $message->uuid) : '#' }}" wire:navigate>
+                                        <a href="{{ Route::has('contact-messages.edit') ? route('contact-messages.edit', $message->uuid) : '#' }}" wire:navigate>
                                             <x-svgs.edit class="text-green-600" />
                                         </a>
                                     </div>
-                                    @if(auth()->user()->isAdmin())
-                                        <div class="action">
-                                            <button x-data=""  x-on:click.prevent="$wire.set('delete_message_id', '{{ $message->uuid }}'); $dispatch('open-modal', 'confirm-message-deletion')">
-                                                <x-svgs.trash class="text-red-600" />
-                                            </button>
-                                        </div>
-                                    @endif
                                 </td>
                             </tr>
                         @empty

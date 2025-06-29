@@ -44,9 +44,9 @@ class Index extends Component
             ->withQueryString();
 
         $count_messages = ContactMessage::count();
-        $count_read = ContactMessage::where('is_read', true)->count();
+        $count_unread = ContactMessage::where('is_read', false)->count();
         $count_important = ContactMessage::where('is_important', true)->count();
 
-        return view('livewire.pages.contact-messages.index', compact('messages', 'count_messages', 'count_read', 'count_important'));
+        return view('livewire.pages.contact-messages.index', compact('messages', 'count_messages', 'count_unread', 'count_important'));
     }
 }

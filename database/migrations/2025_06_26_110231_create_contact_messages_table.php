@@ -18,9 +18,10 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone_number');
             $table->string('message', 2000);
+            $table->string('response', 2000)->nullable();
+            $table->string('notes')->nullable();
             $table->boolean('is_read')->default(0);
             $table->boolean('is_important')->default(0);
-            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }

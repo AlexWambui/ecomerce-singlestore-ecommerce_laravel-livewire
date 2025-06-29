@@ -39,6 +39,22 @@
         }
     }
 
+    .custom_form {
+        @apply px-4;
+
+        .header {
+            @apply flex items-center gap-2 bg-gray-800 text-white rounded-t-lg py-2 px-4;
+
+            a {
+                @apply text-white font-bold;
+            }
+        }
+
+        form {
+            @apply bg-slate-100 p-4;
+        }
+    }
+
     .actions {
         @apply flex items-center gap-2;
 
@@ -82,3 +98,4 @@
 
 @import "./pages/Dashboard.css";
 @import "./pages/Users.css";
+@import "./pages/ContactMessages.css";
