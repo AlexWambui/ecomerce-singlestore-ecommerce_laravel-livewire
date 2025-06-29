@@ -1,8 +1,8 @@
 # TODOs
-- edit form for contact messages.
-- update is_read to true when navigated to edit contact message.
-- ui style for read messages.
-- start infront of message if marked as important.
+~~- edit form for contact messages.~~
+~~- update is_read to true when navigated to edit contact message.~~
+~~- ui style for read messages.~~
+~~- star infront of message if marked as important.~~
 
 # Features
 - Users
