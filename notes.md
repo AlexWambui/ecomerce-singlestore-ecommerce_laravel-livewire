@@ -3,6 +3,8 @@
 ~~- update is_read to true when navigated to edit contact message.~~
 ~~- ui style for read messages.~~
 ~~- star infront of message if marked as important.~~
+- delete functionality for regions.
+- delete functionality for areas.
 
 # Features
 - Users
