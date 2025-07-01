@@ -111,22 +111,46 @@ blog_comments {
     timestamps();
 }
 
-delivery_locations {
+delivery_regions {
     id();
     uuid('uuid')->unique();
-    string('title')->unique();
+    string('name')->unique();
     string('slug')->unique();
+    string('country')->default('KE');
     timestamps();
 }
 
 delivery_areas {
     id();
     uuid('uuid')->unique();
-    string('title')->unique();
+    string('name')->unique();
     string('slug')->unique();
-    decimal('price', 10, 2)->default(0.00);
+    decimal('delivery_fee', 10, 2)->default(0.00);
+    string('postal_code')->nullable();
+    json('coordinates')->nullable();
 
-    foreignId('delivery_location_id')->constrained('delivery_locations')->cascadeOnDelete();
+    foreignId('delivery_region_id')->constrained('delivery_regions')->cascadeOnDelete();
+    timestamps();
+}
+
+delivery_methods {
+    id();
+    uuid('uuid')->unique();
+    string('name')->unique();
+    decimal('base_price', 10, 2);
+    unsignedTinyInteger('estimated_days')->nullable();
+    timestamps();
+}
+
+delivery_area_delivery_methods {
+    id();
+    uuid('uuid')->unique();
+    foreignId('delivery_area_id')->constrained('delivery_areas')->cascadeOnDelete();
+    foreignId('delivery_method_id')->constrained('delivery_methods')->cascadeOnDelete();
+    decimal('custom_price', 10, 2)->nullable();
+
+    unique(['delivery_area_id', 'delivery_method_id']);
+    timestamps();
 }
 
 product_categories {
