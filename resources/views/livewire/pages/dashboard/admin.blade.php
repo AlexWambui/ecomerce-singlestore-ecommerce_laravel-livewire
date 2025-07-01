@@ -25,8 +25,8 @@
                 </div>
 
                 <div class="stat">
-                    <p>001</p>
-                    <p>Locations & 001 Areas</p>
+                    <p>{{ $count_regions }}</p>
+                    <p>{{ Str::plural('Region', $count_regions) }} & {{ $count_areas }} {{ Str::plural('Area', $count_areas) }}</p>
                 </div>
 
                 <div class="stat">
