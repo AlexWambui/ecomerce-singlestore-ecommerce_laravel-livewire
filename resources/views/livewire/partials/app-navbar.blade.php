@@ -17,7 +17,7 @@
         <!-- Nav Links -->
         <div :class="{ 'open': open }" class="nav_links" x-cloak>
             <div class="main_links">
-                <a href="{{ Route::has('dashboard') ? route('dashboard') : '#' }}" wire:navigate>Dashboard</a>
+                <a href="{{ Route::has('dashboard') ? route('dashboard') : '#' }}">Dashboard</a>
                 <a href="{{ Route::has('users.index') ? route('users.index') : '#' }}" wire:navigate>Users</a>
                 <a href="{{ Route::has('sales.index') ? route('sales.index') : '#' }}" wire:navigate>Sales</a>
                 <a href="{{ Route::has('products.index') ? route('products.index') : '#' }}" wire:navigate>Products</a>
