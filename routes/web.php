@@ -13,6 +13,11 @@ use App\Livewire\Pages\Blogs\Categories\Index as BlogCategoriesIndex;
 use App\Http\Controllers\Blogs\BlogCategoryController;
 use App\Livewire\Pages\Blogs\Blogs\Index as BlogsIndex;
 use App\Http\Controllers\Blogs\BlogController;
+use App\Livewire\Pages\DeliveryLocations\Regions\Index as DeliveryRegionsIndex;
+use App\Livewire\Pages\DeliveryLocations\Regions\Form as CreateDeliveryRegion;
+use App\Livewire\Pages\DeliveryLocations\Regions\Form as EditDeliveryRegion;
+use App\Livewire\Pages\DeliveryLocations\Areas\Form as CreateDeliveryArea;
+use App\Livewire\Pages\DeliveryLocations\Areas\Form as EditDeliveryArea;
 
 Route::get('/', HomePage::class)->name('home-page');
 Route::get('contact', ContactPage::class)->name('contact-page');
@@ -41,6 +46,13 @@ Route::middleware(['admin_only'])->group(function () {
         Route::post('blogs', [BlogController::class, 'store'])->name('blogs.store');
         Route::get('blogs/{blog}/edit', [BlogController::class, 'edit'])->name('blogs.edit');
         Route::patch('blogs/{blog}', [BlogController::class, 'update'])->name('blogs.update');
+
+        Route::get('delivery-regions', DeliveryRegionsIndex::class)->name('delivery-regions.index');
+        Route::get('delivery-regions/create', CreateDeliveryRegion::class)->name('delivery-regions.create');
+        Route::get('delivery-regions/{delivery_region}/edit', EditDeliveryRegion::class)->name('delivery-regions.edit');
+
+        Route::get('delivery-areas/create/{region_uuid}', CreateDeliveryArea::class)->name('delivery-areas.create');
+        Route::get('delivery-areas/{area_uuid}/edit', EditDeliveryArea::class)->name('delivery-areas.edit');
     });
 });
 
