@@ -23,7 +23,7 @@
                 <a href="{{ Route::has('products.index') ? route('products.index') : '#' }}" wire:navigate>Products</a>
                 <a href="{{ Route::has('delivery-regions.index') ? route('delivery-regions.index') : '#' }}" wire:navigate>Locations</a>
                 <a href="{{ Route::has('blogs.index') ? route('blogs.index') : '#' }}" wire:navigate>Blogs</a>
-                <a href="{{ Route::has('ratings.index') ? route('ratings.index') : '#' }}" wire:navigate>Ratings</a>
+                {{-- <a href="{{ Route::has('ratings.index') ? route('ratings.index') : '#' }}" wire:navigate>Ratings</a> --}}
                 <a href="{{ Route::has('contact-messages.index') ? route('contact-messages.index') : '#' }}" wire:navigate>Messages</a>
 
                 @auth
