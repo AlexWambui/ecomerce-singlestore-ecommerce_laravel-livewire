@@ -4,9 +4,13 @@ namespace App\Livewire\Pages\Dashboard;
 
 use Livewire\Component;
 use App\Models\User;
+use App\Models\ContactMessage;
+use App\Models\Blogs\Blog;
+use App\Models\Blogs\BlogCategory;
 use App\Models\DeliveryLocations\DeliveryRegion;
 use App\Models\DeliveryLocations\DeliveryArea;
-use App\Models\ContactMessage;
+use App\Models\Products\Product;
+use App\Models\Products\ProductCategory;
 use App\Enums\USER_ROLES;
 use Carbon\Carbon;
 
@@ -21,8 +25,14 @@ class Admin extends Component
         $count_messages = ContactMessage::count();
         $count_unread_messages = ContactMessage::where('is_read', false)->count();
 
+        $count_blogs = Blog::count();
+        $count_blog_categories = BlogCategory::count();
+
         $count_regions = DeliveryRegion::count();
         $count_areas = DeliveryArea::count();
+
+        $count_products = Product::count();
+        $count_product_categories = ProductCategory::count();
 
         // $gross_sales = Sale::sum('total_amount');
         // $net_sales = Sale::sum('total_amount') - Sale::sum('discount');
@@ -113,8 +123,14 @@ class Admin extends Component
             'count_messages',
             'count_unread_messages',
 
+            'count_blogs',
+            'count_blog_categories',
+
             'count_regions',
             'count_areas',
+
+            'count_products',
+            'count_product_categories',
 
             'gross_sales',
             'net_sales',

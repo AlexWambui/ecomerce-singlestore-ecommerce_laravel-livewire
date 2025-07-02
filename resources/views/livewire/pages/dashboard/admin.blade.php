@@ -15,8 +15,8 @@
                 </div>
 
                 <div class="stat">
-                    <p>001</p>
-                    <p>Products & 001 Categories</p>
+                    <p>{{ $count_products }}</p>
+                    <p>{{ Str::plural('Product', $count_products) }} & {{ $count_product_categories }} {{ Str::plural('Category', $count_product_categories) }}</p>
                 </div>
 
                 <div class="stat">
@@ -30,8 +30,8 @@
                 </div>
 
                 <div class="stat">
-                    <p>001</p>
-                    <p>Blogs</p>
+                    <p>{{ $count_blogs }}</p>
+                    <p>{{ Str::plural('Blog', $count_blogs) }} & {{ $count_blog_categories }} {{ Str::plural('Category', $count_blog_categories) }}</p>
                 </div>
 
                 <div class="stat">
@@ -140,14 +140,6 @@
     document.addEventListener('DOMContentLoaded', function () {
         renderSalesChart(@json($sales_data));
         renderCitiesChart(@json($locations_labels), @json($locations_orders));
-    });
-
-    // Reboot the charts after wire:navigate
-    document.addEventListener('livewire:navigated', function () {
-        setTimeout(() => {
-            renderSalesChart(@json($sales_data));
-            renderCitiesChart(@json($locations_labels), @json($locations_orders));
-        }, 50);
     });
 </script>
 
