@@ -18,6 +18,8 @@ use App\Livewire\Pages\DeliveryLocations\Regions\Form as CreateDeliveryRegion;
 use App\Livewire\Pages\DeliveryLocations\Regions\Form as EditDeliveryRegion;
 use App\Livewire\Pages\DeliveryLocations\Areas\Form as CreateDeliveryArea;
 use App\Livewire\Pages\DeliveryLocations\Areas\Form as EditDeliveryArea;
+use App\Livewire\Pages\Products\Categories\Index as ProductCategoriesIndex;
+use App\Http\Controllers\Products\ProductCategoryController;
 
 Route::get('/', HomePage::class)->name('home-page');
 Route::get('contact', ContactPage::class)->name('contact-page');
@@ -53,6 +55,12 @@ Route::middleware(['admin_only'])->group(function () {
 
         Route::get('delivery-areas/create/{region_uuid}', CreateDeliveryArea::class)->name('delivery-areas.create');
         Route::get('delivery-areas/{area_uuid}/edit', EditDeliveryArea::class)->name('delivery-areas.edit');
+
+        Route::get('product-categories', ProductCategoriesIndex::class)->name('product-categories.index');
+        Route::get('product-categories/create', [ProductCategoryController::class, 'create'])->name('product-categories.create');
+        Route::post('product-categories', [ProductCategoryController::class, 'store'])->name('product-categories.store');
+        Route::get('product-categories/{product_category}/edit', [ProductCategoryController::class, 'edit'])->name('product-categories.edit');
+        Route::patch('product-categories/{product_category}', [ProductCategoryController::class, 'update'])->name('product-categories.update');
     });
 });
 
