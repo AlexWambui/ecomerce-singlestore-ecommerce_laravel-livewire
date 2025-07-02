@@ -113,9 +113,9 @@ class Product extends Model
     public function getEffectivePriceAttribute(): float
     {
         if ($this->discount_price && $this->discount_price < $this->selling_price) {
-            return $this->discount_price;
+            return (float) $this->discount_price;
         }
 
-        return $this->selling_price;
+        return (float) ($this->selling_price ?? 0);
     }
 }

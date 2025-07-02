@@ -16,8 +16,8 @@
             @php
                 $links = [
                     ['href' => 'home-page', 'text' => 'Home'],
+                    ['href' => 'shop-page', 'text' => 'Shop'],
                     ['href' => 'about-page', 'text' => 'About'],
-                    ['href' => 'products-page', 'text' => 'Products'],
                     ['href' => 'blog-page', 'text' => 'Blog'],
                     ['href' => 'contact-page', 'text' => 'Contact'],
                 ];

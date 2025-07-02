@@ -76,14 +76,29 @@
 
             <div class="products_list custom_cards">
                 <div class="product card">
-                    <div class="image">
-                        <img src="{{ asset('assets/images/ecommerce.jpg') }}" alt="Product Image">
-                    </div>
+                    @forelse($products as $product)
+                        <div class="image">
+                            <img src="{{ $product->image_url }}" alt="{{ $product->slug }}">
+                        </div>
 
-                    <div class="content">
-                        <h3 class="title">Product Name</h3>
-                        <p class="price">Ksh 1,000</p>
-                    </div>
+                        <div class="content">
+                            <h3 class="title">{{ $product->title }}</h3>
+                            @if ($product->discount_price && $product->discount_price < $product->selling_price)
+                                <p class="price">
+                                    <span class="text-green-600 font-bold">
+                                        Ksh. {{ number_format($product->effective_price, 2) }}
+                                    </span>
+                                    <span class="line-through text-gray-500 ml-2">
+                                        {{ number_format($product->selling_price, 2) }}
+                                    </span>
+                                </p>
+                            @else
+                                <p class="price">Ksh. {{ number_format($product->effective_price, 2) }}</p>
+                            @endif
+                        </div>
+                    @empty
+                        <p>Products are yet to be added.</p>
+                    @endforelse
                 </div>
             </div>
         </div>

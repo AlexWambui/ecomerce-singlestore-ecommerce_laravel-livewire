@@ -26,12 +26,14 @@
                 </div>
             </div>
 
-            <div class="packages">
-                <h3>Packages</h3>
+            <div class="products">
+                <h3>Products</h3>
                 <div class="links">
-                    <a href="{{ Route::has('about-page') ? route('about-page') : '#' }}">Luxury Tours</a>
-                    <a href="{{ Route::has('about-page') ? route('about-page') : '#' }}">Mid-range Tours</a>
-                    <a href="{{ Route::has('about-page') ? route('about-page') : '#' }}">Budget Tours</a>
+                    @forelse($categories as $category)
+                        <a href="#">{{ $category->title }}</a>
+                    @empty
+                        <p>Explore Our Products</p>
+                    @endforelse
                 </div>
             </div>
 
