@@ -1,15 +1,15 @@
 <div class="Products ProductCategories">
     <div class="container">
         <div class="breadcrumbs">
-            <a href="{{ Route::has('products.index') ? route('products.index') : '#' }}">Products</a>
-            <span>Categories</span>
+            <a href="{{ Route::has('product-categories.index') ? route('product-categories.index') : '#' }}">Categories</a>
+            <span>Products</span>
         </div>
 
         <div class="header">
             <div class="info">
-                <h2>Product Categories</h2>
+                <h2>Products</h2>
                 <div class="stats">
-                    <span>{{ $count_categories }} {{ Str::plural('category', $count_categories) }}</span>
+                    <span>{{ $count_products }} {{ Str::plural('product', $count_products) }}</span>
                 </div>
             </div>
 
@@ -34,21 +34,21 @@
             </div>
 
             <div class="button">
-                <a href="{{ Route::has('product-categories.create') ? route('product-categories.create') : '#' }}" class="btn">New Product Category</a>
+                <a href="{{ Route::has('products.create') ? route('products.create') : '#' }}" class="btn">New Product</a>
             </div>
         </div>
 
-        <div class="categories_list small_cards">
-            @forelse($categories as $category)
+        <div class="products_list small_cards">
+            @forelse($products as $product)
                 <div class="card">
                     <div class="details">
                         <div class="image">
-                            <img src="{{ $category->image_url }}" alt="{{ $category->title }}">
+                            <img src="{{ $product->image_url }}" alt="{{ $product->title }}">
                         </div>
 
                         <div class="info">
-                            <h3>{{ $category->title }}</h3>
-                            <p>{!! Str::words($category->description, 5, '...') !!}</p>
+                            <h3>{{ $product->title }}</h3>
+                            <p>{!! Str::words($product->description, 5, '...') !!}</p>
                         </div>
                     </div>
 
@@ -58,13 +58,13 @@
                         </div>
 
                         <div class="crud">
-                            <a href="{{ Route::has('product-categories.edit') ? route('product-categories.edit', $category->uuid) : '#' }}" class="btn">Edit</a>
+                            <a href="{{ Route::has('products.edit') ? route('products.edit', $product->uuid) : '#' }}" class="btn">Edit</a>
                             <button class="btn btn-danger">Delete</button>
                         </div>
                     </div>
                 </div>
             @empty
-                <p>No categories found.</p>
+                <p>No products found.</p>
             @endforelse
         </div>
     </div>

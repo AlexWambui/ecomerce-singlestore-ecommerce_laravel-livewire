@@ -37,6 +37,11 @@ class ProductCategory extends Model
         return 'uuid';
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public function getImageUrlAttribute()
     {
         $image = $this->attributes['image'] ?? null;

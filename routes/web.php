@@ -20,6 +20,9 @@ use App\Livewire\Pages\DeliveryLocations\Areas\Form as CreateDeliveryArea;
 use App\Livewire\Pages\DeliveryLocations\Areas\Form as EditDeliveryArea;
 use App\Livewire\Pages\Products\Categories\Index as ProductCategoriesIndex;
 use App\Http\Controllers\Products\ProductCategoryController;
+use App\Livewire\Pages\Products\Products\Index as ProductsIndex;
+use App\Http\Controllers\Products\ProductController;
+use App\Http\Controllers\Products\ProductImageController;
 
 Route::get('/', HomePage::class)->name('home-page');
 Route::get('contact', ContactPage::class)->name('contact-page');
@@ -61,6 +64,15 @@ Route::middleware(['admin_only'])->group(function () {
         Route::post('product-categories', [ProductCategoryController::class, 'store'])->name('product-categories.store');
         Route::get('product-categories/{product_category}/edit', [ProductCategoryController::class, 'edit'])->name('product-categories.edit');
         Route::patch('product-categories/{product_category}', [ProductCategoryController::class, 'update'])->name('product-categories.update');
+
+        Route::get('products', ProductsIndex::class)->name('products.index');
+        Route::get('products/create', [ProductController::class, 'create'])->name('products.create');
+        Route::post('products', [ProductController::class, 'store'])->name('products.store');
+        Route::get('products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+        Route::patch('products/{product}', [ProductController::class, 'update'])->name('products.update');
+
+        Route::delete('product-images/{product_image}', [ProductImageController::class, 'destroy'])->name('product-images.destroy');
+        Route::post('product-images/sort', [ProductImageController::class, 'sort'])->name('product-images.sort');
     });
 });
 
