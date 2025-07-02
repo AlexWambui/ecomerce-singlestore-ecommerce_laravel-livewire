@@ -5,6 +5,8 @@
 ~~- star infront of message if marked as important.~~
 - delete functionality for regions.
 - delete functionality for areas.
+- delete functionality for product categories.
+- delete functionality for products.
 
 # Features
 - Users
@@ -178,7 +180,7 @@ products {
     decimal('production_cost', 10, 2)->default(0.00);
     decimal('selling_price', 10, 2)->default(0.00);
     decimal('discount_price', 10, 2)->default(0.00)->nullable();
-    unsignedTinyInteger('discount_percentage', 10, 2)->default(0)->nullable();
+    unsignedTinyInteger('discount_percentage')->default(0)->nullable();
     unsignedSmallInteger('product_measurement')->nullable();
     string('measurement_unit')->nullable();
     boolean('track_inventory')->default(true);
@@ -192,6 +194,8 @@ products {
     string('canonical_url')->nullable();
     json('meta_tags')->nullable();
     json('og_tags')->nullable();
+    boolean('noindex')->default(false);
+    boolean('nofollow')->default(false);
 
     foreignId('product_category_id')->nullable()->constrained('product_categories')->nullOnDelete();
     timestamps();
@@ -203,7 +207,7 @@ product_images {
     string('image');
     unsignedSmallInteger('sort_order')->default(5);
 
-    foreignId('product_id')->constrained('products');
+    foreignId('product_id')->constrained('products')->cascadeOnDelete();
     timestamps();
 }
 
@@ -216,8 +220,8 @@ product_reviews {
     boolean('is_visible')->default(1);
     unsignedMediumInteger('sort_order')->default(0);
 
-    foreignId('user_id')->constrained('users')->onDelete('cascade');
-    foreignId('product_id')->constrained('products')->onDelete('cascade');
+    foreignId('user_id')->constrained('users')->cascadeOnDelete();
+    foreignId('product_id')->constrained('products')->cascadeOnDelete();
     timestamps();
 }
 
