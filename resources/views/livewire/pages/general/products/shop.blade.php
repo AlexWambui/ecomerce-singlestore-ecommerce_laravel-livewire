@@ -10,12 +10,14 @@
     <div class="Categories">
         <div class="container">
             <div class="categories_list flex gap-4">
-                <a href="#" class="text-sm">All Categories</a>
-                @forelse ($categories as $category)
-                    <a href="#" class="text-blue-500 text-sm">{{ $category->title }}</a>
-                @empty
+                @if($categories->count() > 0)
+                    <a href="{{ Route::has('shop-page') ? route('shop-page') : '#' }}" class="text-sm" wire:navigate>All Categories</a>
+                    @foreach ($categories as $category)
+                        <a href="#" class="text-blue-500 text-sm">{{ $category->title }}</a>
+                    @endforeach
+                @else
                     <p>No categories yet.</p>
-                @endforelse
+                @endif
             </div>
         </div>
     </div>
@@ -23,27 +25,8 @@
     <div class="Products">
         <div class="container">
             <div class="products_list custom_cards">
-                @forelse ($products as $product)
-                    <div class="product card">
-                        <div class="image">
-                            <img src="{{ $product->image_url }}" alt="{{ $product->slug }}">
-                        </div>
-                        <div class="info">
-                            <a href="{{ Route::has('product.details') ? route('product.details', $product->slug) : '#' }}" class="title">{{ $product->title }}</a>
-                            @if ($product->discount_price && $product->discount_price < $product->selling_price)
-                                <p class="price">
-                                    <span class="text-green-600 font-bold">
-                                        Ksh. {{ number_format($product->effective_price, 2) }}
-                                    </span>
-                                    <span class="line-through text-gray-500 ml-2">
-                                        {{ number_format($product->selling_price, 2) }}
-                                    </span>
-                                </p>
-                            @else
-                                <p class="price">Ksh. {{ number_format($product->effective_price, 2) }}</p>
-                            @endif
-                        </div>
-                    </div>
+                @forelse($products as $product)
+                    @include('livewire.pages.products.products.card')
                 @empty
                     <p>No products yet.</p>
                 @endforelse

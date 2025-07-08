@@ -1,0 +1,53 @@
+.product_card,
+.admin_product_card {
+    .price {
+        .discount_price {
+            @apply line-through text-gray-600 text-sm ml-2;
+        }
+
+        .discount_percentage {
+            @apply text-red-600 font-semibold ml-2;
+        }
+
+        .selling_price {
+            @apply text-green-600 text-lg font-semibold;
+        }
+    }
+}
+
+.admin_product_card {
+    .extras {
+        span {
+            @apply grid gap-1 text-xs text-gray-700;
+        }
+    }
+}
+
+.product_card {
+    .image {
+        @apply relative;
+
+        .cart_btn {
+            @apply absolute right-2 bottom-2;
+
+            button {
+                @apply bg-blue-600 p-3 rounded-lg;
+
+                svg {
+                    @apply text-white w-7 h-7;
+                }
+            }
+
+        }
+    }
+
+    .content {
+        .extras {
+            @apply flex gap-4;
+
+            span {
+                @apply text-sm;
+            }
+        }
+    }
+}

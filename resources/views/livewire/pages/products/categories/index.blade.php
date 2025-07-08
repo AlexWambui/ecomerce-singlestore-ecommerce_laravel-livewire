@@ -53,13 +53,17 @@
                     </div>
 
                     <div class="actions">
-                        <div class="other_actions">
-
+                        <div class="others">
+                            <span>{{ $category->products_count }} {{ Str::plural('product', $category->products_count) }}</span>
                         </div>
 
                         <div class="crud">
-                            <a href="{{ Route::has('product-categories.edit') ? route('product-categories.edit', $category->uuid) : '#' }}" class="btn">Edit</a>
-                            <button class="btn btn-danger">Delete</button>
+                            <a href="{{ Route::has('product-categories.edit') ? route('product-categories.edit', $category->uuid) : '#' }}" class="edit">
+                                <x-svgs.edit />
+                            </a>
+                            <button class="delete">
+                                <x-svgs.trash />
+                            </button>
                         </div>
                     </div>
                 </div>

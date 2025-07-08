@@ -30,10 +30,28 @@ class Index extends Component
         $this->resetPage();
     }
 
+    public function toggleVisibility($product_uuid)
+    {
+        $product = Product::where('uuid', $product_uuid)->firstOrFail();
+        $product->is_visible = !$product->is_visible;
+        $product->save();
+
+        $this->dispatch('notify', type: 'success', message: 'Visibility updated.');
+    }
+
+    public function toggleFeatured($product_uuid)
+    {
+        $product = Product::where('uuid', $product_uuid)->firstOrFail();
+        $product->is_featured = !$product->is_featured;
+        $product->save();
+
+        $this->dispatch('notify', type: 'success', message: 'Featured status updated.');
+    }
+
     public function render()
     {
         $products = Product::query()
-            ->with(['productImages'])
+            ->with(['productImages', 'productCategory'])
             ->when($this->search && $this->search_performed, function ($query) {
                 $query->where(function($q) {
                     $q->where('title', 'like', '%' . $this->search . '%');

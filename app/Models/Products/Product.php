@@ -59,6 +59,14 @@ class Product extends Model
         });
     }
 
+    public function casts(): array
+    {
+        return [
+            'is_visible' => 'boolean',
+            'is_featured' => 'boolean',
+        ];
+    }
+
     public function getRouteKeyName(): string
     {
         return 'uuid';
@@ -84,10 +92,18 @@ class Product extends Model
         return $this->hasMany(ProductView::class);
     }
 
-    public function getImageUrlAttribute(): string
+    public function getIsVisibleLabelAttribute(): string
     {
-        $default_path = asset('assets/images/default-image.jpg');
+        return $this->is_visible ? 'Visible' : 'Invisible';
+    }
 
+    public function getIsFeaturedLabelAttribute(): string
+    {
+        return $this->is_featured ? 'Featured' : 'Not Featured';
+    }
+
+    public function getImageUrlAttribute()
+    {
         // Use already loaded relationship if available, otherwise query
         $image = $this->relationLoaded('productImages')
             ? $this->productImages->sortBy('sort_order')->first()
@@ -96,8 +112,6 @@ class Product extends Model
         if ($image && Storage::disk('public')->exists("products/images/{$image->image}")) {
             return Storage::url("products/images/{$image->image}");
         }
-
-        return $default_path;
     }
 
     public function getDiscountPercentageAttribute(): int

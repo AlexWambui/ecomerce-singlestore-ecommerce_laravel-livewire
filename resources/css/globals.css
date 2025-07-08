@@ -1,5 +1,9 @@
 @import "./tailwind-utilities.css";
 
+.danger {
+    @apply text-red-600;
+}
+
 .image,
 img {
     @apply rounded-lg;

@@ -58,6 +58,14 @@
         }
 
         .actions {
+            span {
+                @apply cursor-pointer;
+            }
+
+            .others {
+                @apply flex gap-2;
+            }
+
             .crud {
                 @apply mt-0 gap-2;
             }
