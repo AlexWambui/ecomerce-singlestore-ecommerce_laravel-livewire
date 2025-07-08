@@ -3,10 +3,22 @@
 ~~- update is_read to true when navigated to edit contact message.~~
 ~~- ui style for read messages.~~
 ~~- star infront of message if marked as important.~~
+
 - delete functionality for regions.
 - delete functionality for areas.
 - delete functionality for product categories.
 - delete functionality for products.
+
+- product details page.
+- products categorized page.
+- shop page search functionality for products.
+
+- add to cart.
+- view cart items.
+- checkout functionality.
+
+- order page.
+- edit orders page.
 
 # Features
 - Users
@@ -198,6 +210,16 @@ products {
     boolean('nofollow')->default(false);
 
     foreignId('product_category_id')->nullable()->constrained('product_categories')->nullOnDelete();
+    timestamps();
+}
+
+product_discounts {
+    id();
+    uuid('uuid')->unique();
+    date('starts_at')->nullable();
+    date('ends_at')->nullable();
+
+    foreignId('product_id')->constrained('products')->cascadeOnDelete();
     timestamps();
 }
 
