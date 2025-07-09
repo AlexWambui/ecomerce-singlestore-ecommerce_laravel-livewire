@@ -26,7 +26,7 @@
         <div class="container">
             <div class="products_list custom_cards">
                 @forelse($products as $product)
-                    @include('livewire.pages.products.products.card')
+                    @include('livewire.pages.general.products.card')
                 @empty
                     <p>No products yet.</p>
                 @endforelse

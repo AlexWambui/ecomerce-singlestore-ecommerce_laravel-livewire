@@ -14,34 +14,36 @@ class Product extends Model
     {
         static::creating(function ($product) {
             $product->uuid = (string) Str::uuid();
-            $product->slug = Str::slug($product->title);
+
+            if(empty($product->slug)) {
+                $product->slug = static::generateUniqueSlug($product->title);
+            }
         });
 
         static::updating(function ($product) {
-            if ($product->isDirty('title')) {
-                $original_slug = $product->getOriginal('slug');
-                $new_slug = Str::slug($product->title);
+            $original_title = $product->getOriginal('title');
+            $original_slug = $product->getOriginal('slug');
 
+            if ($product->isDirty('title') || empty($product->slug)) {
+                $new_slug = static::generateUniqueSlug($product->title, $product->id);
                 $product->slug = $new_slug;
 
                 // Rename associated image files
                 foreach ($product->productImages as $image) {
-                    $oldFilename = $image->image;
+                    $old_filename = $image->image;
 
                     // Only handle files that contain the old slug
-                    if (Str::startsWith($oldFilename, $original_slug)) {
-                        $extension = pathinfo($oldFilename, PATHINFO_EXTENSION);
+                    if (Str::startsWith($old_filename, $original_slug)) {
+                        $extension = pathinfo($old_filename, PATHINFO_EXTENSION);
                         $random = Str::random(6);
-                        $newFilename = $new_slug . '-' . $random . '.' . $extension;
+                        $new_filename = $new_slug . '-' . $random . '.' . $extension;
 
-                        $oldPath = "products/images/{$oldFilename}";
-                        $newPath = "products/images/{$newFilename}";
+                        $old_path = "products/images/{$old_filename}";
+                        $new_path = "products/images/{$new_filename}";
 
-                        if (Storage::disk('public')->exists($oldPath)) {
-                            Storage::disk('public')->move($oldPath, $newPath);
-
-                            // Update image name in DB
-                            $image->update(['image' => $newFilename]);
+                        if (Storage::disk('public')->exists($old_path)) {
+                            Storage::disk('public')->move($old_path, $new_path);
+                            $image->update(['image' => $new_filename]);
                         }
                     }
                 }
@@ -57,6 +59,27 @@ class Product extends Model
                 }
             }
         });
+    }
+
+    /**
+     * Generate a unique slug for a given title.
+     */
+    protected static function generateUniqueSlug(string $title, $ignore_id = null): string
+    {
+        $base_slug = Str::slug($title);
+        $slug = $base_slug;
+        $i = 1;
+
+        while (
+            static::query()
+                ->where('slug', $slug)
+                ->when($ignore_id, fn ($query) => $query->where('id', '!=', $ignore_id))
+                ->exists()
+        ) {
+            $slug = $base_slug . '-' . $i++;
+        }
+
+        return $slug;
     }
 
     public function casts(): array

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Pages\General\HomePage;
 use App\Livewire\Pages\General\ContactPage;
 use App\Livewire\Pages\General\Products\Shop as ShopPage;
+use App\Livewire\Pages\General\Products\Details as ProductDetailsPage;
 
 use App\Livewire\Pages\Dashboard\Index as Dashboard;
 use App\Livewire\Pages\Users\Index as Users;
@@ -29,6 +30,7 @@ use App\Http\Controllers\Products\ProductImageController;
 Route::get('/', HomePage::class)->name('home-page');
 Route::get('contact', ContactPage::class)->name('contact-page');
 Route::get('shop', ShopPage::class)->name('shop-page');
+Route::get('products/details/{slug}', ProductDetailsPage::class)->name('product-details-page');
 
 Route::middleware(['authenticated_user'])->group(function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');

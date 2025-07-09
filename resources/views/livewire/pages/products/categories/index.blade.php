@@ -1,7 +1,7 @@
 <div class="Products ProductCategories">
     <div class="container">
         <div class="breadcrumbs">
-            <a href="{{ Route::has('products.index') ? route('products.index') : '#' }}">Products</a>
+            <a href="{{ Route::has('products.index') ? route('products.index') : '#' }}" wire:navigate>Products</a>
             <span>Categories</span>
         </div>
 

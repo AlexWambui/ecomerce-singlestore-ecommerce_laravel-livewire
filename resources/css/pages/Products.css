@@ -1,22 +1,27 @@
-.product_card,
-.admin_product_card {
-    .price {
-        .discount_price {
-            @apply line-through text-gray-600 text-sm ml-2;
-        }
+:root {
+    --title-color: #2563eb;
+}
 
-        .discount_percentage {
-            @apply text-red-600 font-semibold ml-2;
-        }
+.product_price {
+    .discount_price {
+        @apply line-through text-gray-600 text-sm ml-2;
+    }
 
-        .selling_price {
-            @apply text-green-600 text-lg font-semibold;
-        }
+    .discount_percentage {
+        @apply text-red-600 font-semibold ml-2;
+    }
+
+    .selling_price {
+        @apply text-(--title-color) text-lg font-semibold;
     }
 }
 
 .admin_product_card {
     .extras {
+        .spans_group {
+            @apply flex gap-4;
+        }
+
         span {
             @apply grid gap-1 text-xs text-gray-700;
         }
@@ -31,7 +36,7 @@
             @apply absolute right-2 bottom-2;
 
             button {
-                @apply bg-blue-600 p-3 rounded-lg;
+                @apply bg-(--title-color) p-3 rounded-lg;
 
                 svg {
                     @apply text-white w-7 h-7;
@@ -42,11 +47,72 @@
     }
 
     .content {
+        @apply px-2;
+
+        .title {
+            a,
+            span {
+                @apply text-(--title-color);
+            }
+        }
+
         .extras {
             @apply flex gap-4;
 
             span {
                 @apply text-sm;
+            }
+        }
+    }
+}
+
+.ProductDetails {
+    .details {
+        @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+
+        .images {
+            .image {
+                @apply h-[480px];
+            }
+        }
+
+        .content {
+            @apply md:p-2;
+
+            .title {
+                @apply text-(--title-color) font-black text-2xl lg:text-3xl mb-2;
+            }
+
+            .product_price {
+                @apply mt-2;
+
+                .selling_price {
+                    @apply text-xl lg:text-2xl;
+                }
+            }
+
+            .actions {
+                button {
+                    @apply text-(--title-color) text-white;
+                }
+            }
+
+            .extras {
+                @apply mt-6;
+
+                p {
+                    @apply grid grid-cols-12;
+
+                    span {
+                        &:first-of-type {
+                            @apply col-span-2 text-gray-600;
+                        }
+
+                        &:last-of-type {
+                            @apply col-span-8;
+                        }
+                    }
+                }
             }
         }
     }

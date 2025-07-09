@@ -1,7 +1,7 @@
 <div class="Products ProductCategories">
     <div class="container">
         <div class="breadcrumbs">
-            <a href="{{ Route::has('product-categories.index') ? route('product-categories.index') : '#' }}">Categories</a>
+            <a href="{{ Route::has('product-categories.index') ? route('product-categories.index') : '#' }}" wire:navigate>Categories</a>
             <span>Products</span>
         </div>
 
@@ -70,9 +70,11 @@
                                 </p>
                             @endif
                             <div class="extras">
-                                <span>Code: {{ $product->product_code ?? 'N/A' }}</span>
-                                <span>{{ $product->productCategory->title ?? 'No Category' }}</span>
-                                <span>In Stock: {{ $product->stock_count }}</span>
+                                <div class="spans_group">
+                                    <span>Code: {{ $product->product_code ?? 'N/A' }}</span>
+                                    <span>In Stock: {{ $product->stock_count }}</span>
+                                </div>
+                                <span>{{ $product->productCategory->title ?? 'Uncategorized' }}</span>
                             </div>
                         </div>
                     </div>

@@ -29,23 +29,29 @@
                 <span class="danger">out of stock</span>
             @endif
         </div>
-        <h3 class="title">{{ $product->title }}</h3>
-        @if ($product->discount_price && $product->discount_price < $product->selling_price)
-            <p class="price">
-                <span class="selling_price">
-                    Ksh. {{ number_format($product->effective_price, 2) }}
-                </span>
+
+        <h3 class="title">
+            @if($product->slug)
+                <a href="{{ Route::has('product-details-page') ? route('product-details-page', $product->slug) : '#' }}" wire:navigate>
+                    {{ $product->title }}
+                </a>
+            @else
+                <span>{{ $product->title }} ---</span>
+            @endif
+        </h3>
+
+        <p class="product_price">
+            <span class="selling_price">
+                Ksh. {{ number_format($product->effective_price, 2) }}
+            </span>
+            @if ($product->discount_price && $product->discount_price < $product->selling_price)
                 <span class="discount_price">
                     {{ number_format($product->selling_price, 2) }}
                 </span>
                 <span class="discount_percentage">
                     {{ $product->discount_percentage }}% off
                 </span>
-            </p>
-        @else
-            <p class="price">
-                <span class="selling_price">Ksh. {{ number_format($product->effective_price, 2) }}</span>
-            </p>
-        @endif
+            @endif
+        </p>
     </div>
 </div>

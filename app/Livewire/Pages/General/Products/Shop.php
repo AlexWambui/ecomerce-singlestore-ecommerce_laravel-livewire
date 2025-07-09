@@ -16,7 +16,7 @@ class Shop extends Component
         $categories = ProductCategory::orderBy('title')->get();
 
         $products = Product::query()
-            ->select('id', 'title', 'slug', 'discount_price', 'selling_price', 'stock_count')
+            ->select('id', 'uuid', 'title', 'slug', 'discount_price', 'selling_price', 'stock_count')
             ->with('productImages')
             ->where('is_visible', true)
             ->paginate(12);
