@@ -1,45 +1,18 @@
-# TODOs
-~~- edit form for contact messages.~~
-~~- update is_read to true when navigated to edit contact message.~~
-~~- ui style for read messages.~~
-~~- star infront of message if marked as important.~~
-
-- delete functionality for regions.
-- delete functionality for areas.
-- delete functionality for product categories.
-- delete functionality for products.
-
-- product details page.
-- products categorized page.
-- shop page search functionality for products.
-
-- add to cart.
-- view cart items.
-- checkout functionality.
-
-- order page.
-- edit orders page.
-
-# Features
-- Users
-- Products
-- Product Categories
-- Product Ratings
-- Sales
-- Delivery Locations
-- Delivery Areas
-- Blogs
-- Contact Messages
-
 # User Stories
 General
-- can update their profile information.
+~~- can update their profile information.~~
+- can update their profile photo.
+- can show loading states when searching.
 
 Super Admins
 - can add other super admins.
 - cannot delete their accounts.
 
 Admins / Staff
+~~- can view and add notes to contact messages.~~
+~~- can updated is_read to true when navigated to edit a contact message.~~
+~~- can clearly visualize read messages.~~
+~~- can see a star infront of message if marked as important.~~
 - cannot delete their account.
 - can CRUD users details.
 - can CRUD products.
@@ -48,7 +21,7 @@ Admins / Staff
 - can CRUD delivery areas.
 - can CRUD delivery blogs.
 - can CRUD delivery blog categories.
-- can view and add notes to contact messages.
+- can view sales edit form.
 - can edit sales delivery and payment details.
 
 Cashier
@@ -56,13 +29,36 @@ Cashier
 - cannot delete their account.
 
 Users
-- can view their sales with delivery and payment statuses.
-- can rate products.
-- can send contact form messages.
+~~- can view product details page.~~
+~~- can view products categorized page.~~
+~~- can send contact form messages.~~
+~~- can search for products in the shop page.~~
 - can add items to cart without logging in.
+- can view cart items without loggin in.
 - can checkout once they login.
+- can view their sales with delivery and payment statuses.
+- can view ratings for products.
+- can rate products.
 - can read and add comments to blogs.
 - can delete their accounts.
+
+# Features
+- Home
+- Shop
+- About
+- Contact
+
+- Users
+- Products
+- Product Categories
+- Product Ratings
+- Product Price Tiers
+- Sales
+- Delivery Regions
+- Delivery Areas
+- Blogs
+- Blog Categories
+- Contact Messages
 
 # DB DESIGN
 ```
