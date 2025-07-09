@@ -31,6 +31,39 @@
 - Blogs
 - Contact Messages
 
+# User Stories
+General
+- can update their profile information.
+
+Super Admins
+- can add other super admins.
+- cannot delete their accounts.
+
+Admins / Staff
+- cannot delete their account.
+- can CRUD users details.
+- can CRUD products.
+- can CRUD product categories.
+- can CRUD delivery regions.
+- can CRUD delivery areas.
+- can CRUD delivery blogs.
+- can CRUD delivery blog categories.
+- can view and add notes to contact messages.
+- can edit sales delivery and payment details.
+
+Cashier
+- can edit sales delivery and payment details.
+- cannot delete their account.
+
+Users
+- can view their sales with delivery and payment statuses.
+- can rate products.
+- can send contact form messages.
+- can add items to cart without logging in.
+- can checkout once they login.
+- can read and add comments to blogs.
+- can delete their accounts.
+
 # DB DESIGN
 ```
 users {
