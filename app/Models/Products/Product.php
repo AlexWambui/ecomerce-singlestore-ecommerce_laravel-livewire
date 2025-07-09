@@ -125,6 +125,16 @@ class Product extends Model
         return $this->is_featured ? 'Featured' : 'Not Featured';
     }
 
+    public function getCategorySlugAttribute()
+    {
+        return $this->productCategory?->slug ?? null;
+    }
+
+    public function getCategoryTitleAttribute()
+    {
+        return $this->productCategory?->title ?? 'uncategorized';
+    }
+
     public function getImageUrlAttribute()
     {
         // Use already loaded relationship if available, otherwise query

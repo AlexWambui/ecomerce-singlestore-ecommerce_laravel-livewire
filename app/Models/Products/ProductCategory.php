@@ -14,12 +14,12 @@ class ProductCategory extends Model
     {
         static::creating(function ($category) {
             $category->uuid = (string) Str::uuid();
-            $category->slug = Str::slug($category->name);
+            $category->slug = Str::slug($category->title);
         });
 
         static::updating(function ($category) {
-            if ($category->isDirty('name')) {
-                $category->slug = Str::slug($category->name);
+            if ($category->isDirty('title')) {
+                $category->slug = Str::slug($category->title);
             }
         });
 

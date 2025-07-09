@@ -50,25 +50,21 @@
 
                         <div class="info">
                             <h3>{{ $product->title }}</h3>
-                            @if ($product->discount_price && $product->discount_price < $product->selling_price)
-                                <p class="price">
-                                    <span class="selling_price">
-                                        Ksh. {{ number_format($product->effective_price, 2) }}
-                                    </span>
+
+                            <p class="product_price">
+                                <span class="selling_price">
+                                    Ksh. {{ number_format($product->effective_price, 2) }}
+                                </span>
+                                @if ($product->discount_price && $product->discount_price < $product->selling_price)
                                     <span class="discount_price">
                                         {{ number_format($product->selling_price, 2) }}
                                     </span>
                                     <span class="discount_percentage">
                                         {{ $product->discount_percentage }}% off
                                     </span>
-                                </p>
-                            @else
-                                <p class="price">
-                                    <span class="selling_price">
-                                        Ksh. {{ number_format($product->effective_price, 2) }}
-                                    </span>
-                                </p>
-                            @endif
+                                @endif
+                            </p>
+
                             <div class="extras">
                                 <div class="spans_group">
                                     <span>Code: {{ $product->product_code ?? 'N/A' }}</span>

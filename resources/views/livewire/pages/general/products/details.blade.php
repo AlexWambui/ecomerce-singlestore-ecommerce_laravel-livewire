@@ -1,13 +1,30 @@
 <div class="Products">
     <section class="ProductDetails">
         <div class="details container">
-            <div class="images">
-                <div class="image">
-                    @if($product->image_url)
-                        <img src="{{ $product->image_url }}" alt="{{ $product->slug }}">
-                    @else
-                        <img src="{{ asset('assets/images/default-image.jpg') }}" alt="{{ $product->slug }}">
-                    @endif
+            <div class="images" x-data="{ active_image: '{{ $product->image_url ?? asset('assets/images/default-image.jpg') }}' }">
+                <div class="main_image">
+                    <div class="image">
+                        <img :src="active_image" alt="{{ $product->slug }}" id="active_image" />
+                    </div>
+                </div>
+
+                <div class="other_images">
+                    @forelse($product->productImages as $image)
+                        @php
+                            $imageUrl = Storage::url('products/images/' . $image->image);
+                        @endphp
+
+                        <div class="image" @click="active_image = '{{ $imageUrl }}'">
+                            <img
+                                src="{{ $imageUrl }}"
+                                alt="Other Image"
+                                :class="{ 'active ring-2 ring-blue-500': active_image === '{{ $imageUrl }}' }"
+                                class="transition duration-200"
+                            />
+                        </div>
+                    @empty
+                        <p>No other images available</p>
+                    @endforelse
                 </div>
             </div>
 
@@ -44,18 +61,22 @@
                     <p>
                         <span>Category</span>
                         <span>
-                            : <a href="{{ Route::has('categorized-products') ? route('categorized-products') : '#' }}">
-                                {{ $product->productCategory->title ?? 'uncategorized' }}
-                            </a>
+                            : @if($product->category_slug)
+                                <a href="{{ Route::has('products-categorized-page') ? route('products-categorized-page', $product->category_slug) : '#' }}" wire:navigate>
+                                    {{ $product->category_title }}
+                                </a>
+                            @else
+                                Uncategorized
+                            @endif
                         </span>
                     </p>
                     <p>
-                        <span>In count</span>
+                        <span>In stock</span>
                         <span>: {{ $product->stock_count }}</span>
                     </p>
                     <p>
                         <span>Measurement</span>
-                        <span>: {{ ($product->product_measurement && $product->measurement_unit) ? $product->product_measurement . ' ' . $product->measurement_unit : 'N/A' }}</span>
+                        <span>: {{ $product->product_measurement ? $product->product_measurement . ' ' . $product->measurement_unit : 'N/A' }}</span>
                     </p>
                     <p>
                         <span>Rating</span>
@@ -71,7 +92,20 @@
             </div>
 
             <div class="reviews">
+                {{-- Reviews will go here --}}
+            </div>
+        </div>
+    </section>
 
+    <section class="RelatedProducts">
+        <div class="container">
+            <h2 class="related_products_title">You may also like</h2>
+            <div class="products_list custom_cards">
+                @forelse($related_products as $product)
+                    @include('livewire.pages.general.products.card')
+                @empty
+                    <p>No related products found</p>
+                @endforelse
             </div>
         </div>
     </section>

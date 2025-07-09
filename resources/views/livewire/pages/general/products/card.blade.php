@@ -21,9 +21,13 @@
     <div class="content">
         <div class="extras">
             <span>
-                <a href="{{ Route::has('categorized-products') ? route('categorized-products') : '#' }}">
-                    {{ $product->productCategory->title ?? 'uncategorized' }}
-                </a>
+                @if($product->category_slug)
+                    <a href="{{ Route::has('products-categorized-page') ? route('products-categorized-page', $product->category_slug) : '#' }}" wire:navigate>
+                        {{ $product->category_title }}
+                    </a>
+                @else
+                    Uncategorized
+                @endif
             </span>
             @if($product->stock_count <= 0)
                 <span class="danger">out of stock</span>

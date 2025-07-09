@@ -13,3 +13,20 @@ img {
         @apply object-cover w-full h-full;
     }
 }
+
+.breadcrumbs {
+    @apply flex items-center text-sm text-gray-700;
+
+    a {
+        @apply font-bold hover:font-semibold relative text-blue-600;
+
+        &::after {
+            content: '/';
+            @apply mx-2 text-gray-500;
+        }
+    }
+
+    span {
+        @apply text-gray-700;
+    }
+}

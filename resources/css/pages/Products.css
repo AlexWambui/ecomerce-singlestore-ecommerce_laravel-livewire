@@ -71,8 +71,30 @@
         @apply grid grid-cols-1 md:grid-cols-2 gap-6;
 
         .images {
-            .image {
-                @apply h-[480px];
+            .main_image {
+                .image {
+                    @apply h-[500px];
+
+                    img {
+                        @apply transition duration-300;
+                    }
+                }
+            }
+
+            .other_images {
+                @apply flex gap-6 mt-4;
+
+                .image {
+                    @apply w-[100px] h-[100px] cursor-pointer overflow-hidden transition-transform hover:scale-105;
+
+                    img {
+                        @apply border-2 border-transparent transition duration-200;
+                    }
+
+                    img.active {
+                        @apply border-blue-500;
+                    }
+                }
             }
         }
 
@@ -93,7 +115,7 @@
 
             .actions {
                 button {
-                    @apply text-(--title-color) text-white;
+                    @apply bg-(--title-color) text-white font-semibold;
                 }
             }
 
@@ -113,6 +135,34 @@
                         }
                     }
                 }
+            }
+        }
+    }
+}
+
+.RelatedProducts {
+    .container {
+        .related_products_title {
+            @apply font-bold text-2xl lg:text-3xl mb-4;
+        }
+    }
+}
+
+.CategorizedProducts {
+    .HeroSection {
+        .container {
+            @apply text-center space-y-2;
+
+            .breadcrumbs {
+                @apply justify-center;
+            }
+
+            .title {
+                @apply font-bold text-2xl lg:text-4xl;
+            }
+
+            p {
+                @apply text-base lg:text-lg;
             }
         }
     }

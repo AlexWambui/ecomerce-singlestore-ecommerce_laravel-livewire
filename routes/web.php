@@ -5,6 +5,7 @@ use App\Livewire\Pages\General\HomePage;
 use App\Livewire\Pages\General\ContactPage;
 use App\Livewire\Pages\General\Products\Shop as ShopPage;
 use App\Livewire\Pages\General\Products\Details as ProductDetailsPage;
+use App\Livewire\Pages\General\Products\Categorized as ProductsCategorizedPage;
 
 use App\Livewire\Pages\Dashboard\Index as Dashboard;
 use App\Livewire\Pages\Users\Index as Users;
@@ -31,6 +32,7 @@ Route::get('/', HomePage::class)->name('home-page');
 Route::get('contact', ContactPage::class)->name('contact-page');
 Route::get('shop', ShopPage::class)->name('shop-page');
 Route::get('products/details/{slug}', ProductDetailsPage::class)->name('product-details-page');
+Route::get('products/category/{slug}', ProductsCategorizedPage::class)->name('products-categorized-page');
 
 Route::middleware(['authenticated_user'])->group(function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');
