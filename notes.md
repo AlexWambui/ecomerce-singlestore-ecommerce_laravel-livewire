@@ -287,6 +287,8 @@ product_views {
 }
 
 discount_codes {
+    id();
+    uuid('uuid')->unique();
     unsignedTinyInteger('type');
     decimal('value', 10, 2);
     boolean('is_active')->default(true);
@@ -295,23 +297,17 @@ discount_codes {
     timestamp('ends_at')->nullable();
     string('applies_to')->nullable();
     json('conditions')->nullable();
-}
-
-carts {
-    id();
-    uuid('uuid')->unique();
-    foreignId('user_id')->constrained()->cascadeOnDelete();
     timestamps();
 }
-
 
 cart_items {
     id();
     uuid('uuid')->unique();
-    foreignId('cart_id')->constrained()->onDelete('cascade');
-    foreignId('product_id')->constrained()->onDelete('cascade');
-    foreignId('variant_id')->nullable()->constrained('product_variants');
-    unsignedSmallInteger('quantity');
+    unsignedSmallInteger('quantity')->default(1);
+
+    foreignId('product_id')->constrained('products')->onDelete('cascade');
+    foreignId('user_id')->constrained('users')->onDelete('cascade');
+    unique(['user_id', 'product_id']);
     timestamps();
 }
 
@@ -320,15 +316,6 @@ wishlists {
     uuid('uuid')->unique();
     foreignId('user_id')->constrained()->onDelete('cascade');
     foreignId('product_id')->constrained()->onDelete('cascade');
-    timestamps();
-}
-
-returns {
-    id();
-    uuid('uuid')->unique();
-    foreignId('sale_id')->constrained()->onDelete('cascade');
-    string('reason');
-    unsignedTinyInteger('status'); // 0 = Requested, 1 = Approved, 2 = Rejected, 3 = Refunded
     timestamps();
 }
 
@@ -393,6 +380,16 @@ payments {
     text('customer_message');
 
     foreignId('sale_id')->constrained('sales')->cascadeOnDelete();
+    timestamps();
+}
+
+sale_returns {
+    id();
+    uuid('uuid')->unique();
+    unsignedTinyInteger('status'); // 0 = Requested, 1 = Approved, 2 = Rejected, 3 = Refunded
+    string('reason');
+
+    foreignId('sale_id')->constrained()->onDelete('cascade');
     timestamps();
 }
 ```

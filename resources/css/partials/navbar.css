@@ -21,7 +21,7 @@
             }
 
             .other_links {
-                @apply mt-4 md:mt-0;
+                @apply mt-4 md:mt-0 lg:flex lg:items-center lg:gap-4;
 
                 a {
                     @apply md:bg-gray-900 md:text-white hover:text-blue-400 md:rounded-full md:py-2 md:px-6;

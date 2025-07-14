@@ -5,9 +5,9 @@
 | Flash Messages Component
 |--------------------------------------------------------------------------
 - For livewire components without redirects:
-$this->dispatch('notify', $message, $type);
-- For livewire components with redirects:
-session()->flash('notify', ['message' => $message, 'type' => $type]);
+  $this->dispatch('notify', $message, $type);
+- For livewire components with redirects or normal controllers:
+  session()->flash('notify', ['message' => $message, 'type' => $type]);
 */
 
 namespace App\Livewire\Partials;

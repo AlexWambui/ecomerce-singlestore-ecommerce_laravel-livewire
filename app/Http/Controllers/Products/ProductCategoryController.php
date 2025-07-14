@@ -34,7 +34,9 @@ class ProductCategoryController extends Controller
 
         ProductCategory::create($validated_data);
 
-        return redirect()->route('product-categories.index')->with('success', 'Product Category added successfuly');
+        session()->flash('notify', ['type' => 'success', 'message' => 'Category added successfully']);
+
+        return redirect()->route('product-categories.index');
     }
 
     public function edit(ProductCategory $product_category)
@@ -81,6 +83,8 @@ class ProductCategoryController extends Controller
 
         $product_category->update($validated_data);
 
-        return redirect()->route('product-categories.index')->with('success', 'Product category updated successfully');
+        session()->flash('notify', ['type' => 'success', 'message' => 'Category updated successfully']);
+
+        return redirect()->route('product-categories.index');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models\Products;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Sales\CartItem;
 
 class Product extends Model
 {
@@ -113,6 +114,11 @@ class Product extends Model
     public function productViews()
     {
         return $this->hasMany(ProductView::class);
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
     }
 
     public function getIsVisibleLabelAttribute(): string

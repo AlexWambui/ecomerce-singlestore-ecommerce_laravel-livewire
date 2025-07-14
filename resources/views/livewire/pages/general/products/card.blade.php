@@ -8,12 +8,9 @@
 
         @if ($product->stock_count > 0)
             <div class="cart_btn">
-                <form action="{{ Route::has('cart.store') ? route('cart.store', $product->id) : '#' }}" method="POST">
-                    @csrf
-                    <button type="submit" title="Add to Cart">
-                        <x-svgs.add-to-shopping-cart />
-                    </button>
-                </form>
+                <button wire:click="addToCart({{ $product->id }})" title="Add to Cart">
+                    <x-svgs.add-to-shopping-cart />
+                </button>
             </div>
         @endif
     </div>

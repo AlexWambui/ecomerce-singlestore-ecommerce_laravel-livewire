@@ -9,6 +9,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Session;
+use App\Services\CartService;
 
 class Login extends Component
 {
@@ -77,11 +78,14 @@ class Login extends Component
     /**
      * Handle an incoming authentication request.
      */
-    public function login(): void
+    public function login(CartService $cart): void
     {
         $this->validate();
 
         $this->authenticate();
+
+        // Merge session cart into database cart
+        $cart->mergeSessionCartIntoDatabase(auth()->id());
 
         Session::regenerate();
 

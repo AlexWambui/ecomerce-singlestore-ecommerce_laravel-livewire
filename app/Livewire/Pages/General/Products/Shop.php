@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Products\Product;
 use App\Models\Products\ProductCategory;
+use App\Services\CartService;
 
 class Shop extends Component
 {
@@ -27,6 +28,15 @@ class Shop extends Component
         $this->search = '';
         $this->search_performed = false;
         $this->resetPage();
+    }
+
+    public function addToCart(int $product_id): void
+    {
+        app(CartService::class)->add($product_id);
+
+        $this->dispatch('cart-updated');
+
+        $this->dispatch('notify', 'Added to cart', 'success');
     }
 
     public function render()
