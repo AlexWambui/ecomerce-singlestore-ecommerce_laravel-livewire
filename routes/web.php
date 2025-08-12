@@ -6,8 +6,11 @@ use App\Livewire\Pages\General\ContactPage;
 use App\Livewire\Pages\General\Products\Shop as ShopPage;
 use App\Livewire\Pages\General\Products\Details as ProductDetailsPage;
 use App\Livewire\Pages\General\Products\Categorized as ProductsCategorizedPage;
+use App\Livewire\Pages\General\Sales\Cart as CartPage;
+use App\Livewire\Pages\General\Sales\Checkout as Checkout;
 
 use App\Livewire\Pages\Dashboard\Index as Dashboard;
+
 use App\Livewire\Pages\Users\Index as Users;
 use App\Livewire\Pages\Users\Form as CreateUser;
 use App\Livewire\Pages\Users\Form as EditUser;
@@ -33,6 +36,8 @@ Route::get('contact', ContactPage::class)->name('contact-page');
 Route::get('shop', ShopPage::class)->name('shop-page');
 Route::get('products/details/{slug}', ProductDetailsPage::class)->name('product-details-page');
 Route::get('products/category/{slug}', ProductsCategorizedPage::class)->name('products-categorized-page');
+Route::get('cart', CartPage::class)->name('cart-page');
+Route::get('checkout', Checkout::class)->name('checkout-page');
 
 Route::middleware(['authenticated_user'])->group(function () {
     Route::get('dashboard', Dashboard::class)->name('dashboard');

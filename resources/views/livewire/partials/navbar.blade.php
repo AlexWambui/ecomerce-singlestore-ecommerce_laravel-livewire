@@ -34,18 +34,21 @@
 
             <div class="other_links">
                 <div class="cart relative bg-blue-100 p-2 rounded-lg">
-                    <x-svgs.shopping-cart class="w-6 h-6" />
-                    @if($cart_count >= 0)
-                        <span class="absolute p-2 -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
-                            {{ $cart_count }}
-                        </span>
-                    @endif
+                    <a href="{{ Route::has('cart-page') ? route('cart-page') : '#' }}" wire:navigate>
+                        <x-svgs.shopping-cart class="w-6 h-6" />
+
+                        @if($cart_count >= 0)
+                            <span class="absolute p-2 -top-2 -right-2 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                                {{ $cart_count }}
+                            </span>
+                        @endif
+                    </a>
                 </div>
 
                 @auth
                     <button wire:click="logout" class="btn btn_danger">Logout</button>
                 @else
-                    <a href="{{ Route::has('login') ? route('login') : '#' }}" wire:navigate>Login</a>
+                    <a href="{{ Route::has('login') ? route('login') : '#' }}" class="btn" wire:navigate>Login</a>
                 @endauth
             </div>
         </div>

@@ -16,3 +16,5 @@
 @import "./pages/general/HomePage.css";
 @import "./pages/general/ContactPage.css";
 @import "./pages/Products.css";
+@import "./pages/CartPage.css";
+@import "./pages/CheckoutPage.css";
