@@ -7,6 +7,8 @@ use Illuminate\Support\Str;
 
 class ContactMessage extends Model
 {
+    protected $guarded = [];
+
     protected static function booted(): void
     {
         static::creating(function (ContactMessage $message) {
@@ -15,8 +17,6 @@ class ContactMessage extends Model
             }
         });
     }
-
-    protected $guarded = [];
 
     protected $casts = [
         'is_read' => 'boolean',

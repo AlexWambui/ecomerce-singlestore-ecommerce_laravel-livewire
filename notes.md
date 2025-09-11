@@ -319,7 +319,7 @@ wishlists {
     timestamps();
 }
 
-sales {
+orders {
     id();
     uuid('uuid')->unique();
     string('order_number');
@@ -337,7 +337,7 @@ sales {
     timestamps();
 }
 
-sale_items {
+order_items {
     id();
     uuid('uuid')->unique();
     string('title');
@@ -358,7 +358,7 @@ order_deliveries {
     string('phone_number');
     string('address');
     string('additional_information')->nullalbe();
-    string('location');
+    string('region');
     string('area');
     decimal('shipping_cost');
     unsignedTinyInteger('delivery_status')->default(0);
