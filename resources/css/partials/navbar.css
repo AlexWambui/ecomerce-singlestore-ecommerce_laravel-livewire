@@ -1,15 +1,29 @@
 .guest_nav {
-    @apply sticky top-0 left-0 right-0 z-50 bg-white text-gray-900 font-semibold;
+    @apply sticky top-0 left-0 right-0 z-50 font-semibold;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    z-index: 100;
 
     .container {
-        @apply flex items-center justify-between flex-wrap py-4 px-4 md:px-16 mx-auto;
+        @apply flex items-center justify-between flex-wrap py-2 px-4 md:px-16 mx-auto;
 
-        .branding a {
-            @apply flex items-center gap-2 text-lg font-bold text-gray-900;
+        .active {
+            @apply text-[var(--theme-bg)] font-bold border-b-2 border-b-[var(--theme-bg)];
+        }
+
+        .branding {
+            a {
+                @apply flex items-center gap-2 text-lg font-bold text-gray-900;
+
+                img {
+                    @apply w-[55px] h-[55px] rounded-full;
+                }
+            }
         }
 
         .nav_links {
-            @apply w-full md:w-auto hidden md:flex md:items-center md:space-x-8 mt-6 md:mt-0;
+            @apply hidden md:flex md:items-center md:space-x-12 w-full md:w-auto mt-6 md:mt-0;
 
             .main_links a,
             .other_links a {
@@ -17,15 +31,11 @@
             }
 
             .main_links {
-                @apply md:flex md:space-x-8;
+                @apply flex space-x-12;
             }
 
             .other_links {
-                @apply mt-4 md:mt-0 lg:flex lg:items-center lg:gap-4;
-
-                a.btn {
-                    @apply md:bg-gray-900 md:text-white hover:text-blue-400 md:rounded-full md:py-2 md:px-6;
-                }
+                @apply mt-4 md:mt-0;
             }
         }
 
@@ -34,11 +44,15 @@
         }
 
         .burger_menu {
-            @apply flex flex-col justify-center items-center space-y-1 cursor-pointer md:hidden;
+            @apply flex flex-col justify-center items-center space-y-1 cursor-pointer md:hidden ml-4;
 
             span {
                 @apply w-6 h-0.5 bg-gray-900 block transition duration-300 ease-in-out;
             }
+        }
+
+        a.btn_login {
+            @apply bg-[var(--theme-bg)] text-[var(--theme-bg-text)] hover:bg-blue-600 font-semibold tracking-wide py-[12px] px-[16px] rounded-lg;
         }
     }
 }
