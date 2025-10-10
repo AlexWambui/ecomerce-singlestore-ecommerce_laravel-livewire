@@ -101,7 +101,7 @@
                     <label for="measurement_unit">Measurement Unit</label>
                     <select name="measurement_unit" id="measurement_unit">
                         <option value="">Select Measurement Unit</option>
-                        @foreach(\App\Enums\PRODUCT_MEASUREMENT_UNITS::labels() as $value => $label)
+                        @foreach(\App\Enums\ProductMeasurementUnits::labels() as $value => $label)
                             <option value="{{ $value }}" {{ old('measurement_unit', $product->measurement_unit) == $value ? 'selected' : '' }}>{{ $label }}</option>
 
                         @endforeach

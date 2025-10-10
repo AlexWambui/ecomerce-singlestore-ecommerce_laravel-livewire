@@ -5,7 +5,7 @@ namespace App\Livewire\Pages\Users;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\User;
-use App\Enums\USER_ROLES;
+use App\Enums\UserRoles;
 use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
@@ -83,10 +83,10 @@ class Index extends Component
 
         return view('livewire.pages.users.index', [
             'users' => $users,
-            'count_users' => User::where('role', !USER_ROLES::SUPER_ADMIN)->count(),
-            'count_super_admins' => User::where('role', USER_ROLES::SUPER_ADMIN->value)->count(),
-            'count_admins' => User::where('role', USER_ROLES::ADMIN->value)->count(),
-            'count_owners' => User::where('role', USER_ROLES::OWNER->value)->count(),
+            'count_users' => User::where('role', !UserRoles::SUPER_ADMIN)->count(),
+            'count_super_admins' => User::where('role', UserRoles::SUPER_ADMIN->value)->count(),
+            'count_admins' => User::where('role', UserRoles::ADMIN->value)->count(),
+            'count_owners' => User::where('role', UserRoles::OWNER->value)->count(),
         ]);
     }
 }

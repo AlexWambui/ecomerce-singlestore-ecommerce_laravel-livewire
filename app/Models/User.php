@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Traits\UserRoleScopes;
-use App\Enums\USER_ROLES;
+use App\Enums\UserRoles;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -53,7 +53,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return [
             'uuid' => 'string',
-            'role' => USER_ROLES::class,
+            'role' => UserRoles::class,
             'status' => 'boolean',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
@@ -89,15 +89,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isSuperAdmin(): bool
     {
-        return $this->role === USER_ROLES::SUPER_ADMIN;
+        return $this->role === UserRoles::SUPER_ADMIN;
     }
 
     public function isAdmin(): bool
     {
         return in_array($this->role, [
-            USER_ROLES::SUPER_ADMIN,
-            USER_ROLES::ADMIN,
-            USER_ROLES::OWNER,
+            UserRoles::SUPER_ADMIN,
+            UserRoles::ADMIN,
+            UserRoles::OWNER,
         ]);
     }
 

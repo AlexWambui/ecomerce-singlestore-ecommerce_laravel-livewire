@@ -8,7 +8,7 @@ use Illuminate\Validation\Rules;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Enum;
-use App\Enums\USER_ROLES;
+use App\Enums\UserRoles;
 
 class Form extends Component
 {
@@ -34,7 +34,7 @@ class Form extends Component
             'last_name' => ['required', 'string', 'max:120'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:users,email,' . $this->user_id],
             'password' => ['nullable', 'string', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', new Enum(USER_ROLES::class)],
+            'role' => ['required', new Enum(UserRoles::class)],
         ];
 
         if (!$this->user_id) {

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Products;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use App\Enums\PRODUCT_MEASUREMENT_UNITS;
+use App\Enums\ProductMeasurementUnits;
 
 class ProductRequest extends FormRequest
 {
@@ -50,7 +50,7 @@ class ProductRequest extends FormRequest
             'discount_price' => ['nullable', 'numeric', 'min:0'],
             'discount_percentage' => ['nullable', 'integer', 'min:0', 'max:100'],
             'product_measurement' => ['nullable', 'integer', 'min:0'],
-            'measurement_unit' => ['nullable', Rule::in(array_column(PRODUCT_MEASUREMENT_UNITS::cases(), 'value'))],
+            'measurement_unit' => ['nullable', Rule::in(array_column(ProductMeasurementUnits::cases(), 'value'))],
             'track_inventory' => ['sometimes', 'boolean'],
             'stock_count' => ['nullable', 'integer', 'min:0'],
             'safety_stock' => ['nullable', 'integer', 'min:0'],

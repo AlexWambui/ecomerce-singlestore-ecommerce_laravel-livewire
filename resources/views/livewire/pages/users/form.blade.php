@@ -27,10 +27,10 @@
             <select wire:model="role" id="role">
                 <option value="">Select a role</option>
                 @php
-                    use \App\Enums\USER_ROLES;
-                    $labels = auth()->user()->role === USER_ROLES::SUPER_ADMIN->value
-                        ? USER_ROLES::labels()
-                        : USER_ROLES::adminLabels();
+                    use \App\Enums\UserRoles;
+                    $labels = auth()->user()->role === UserRoles::SUPER_ADMIN->value
+                        ? UserRoles::labels()
+                        : UserRoles::adminLabels();
                 @endphp
                 @foreach($labels as $value => $label)
                     <option value="{{ $value }}">{{ $label }}</option>

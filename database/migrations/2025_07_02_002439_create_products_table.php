@@ -33,6 +33,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->json('attributes')->nullable();
             $table->unsignedSmallInteger('sort_order')->default(0);
+            
             $table->string('meta_title')->nullable();
             $table->string('meta_description', 500)->nullable();
             $table->string('canonical_url')->nullable();

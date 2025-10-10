@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum PRODUCT_MEASUREMENT_UNITS: string
+enum ProductMeasurementUnits: string
 {
     case KILOGRAM = 'Kg';
     case GRAM = 'g';

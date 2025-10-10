@@ -11,16 +11,16 @@ use App\Models\DeliveryLocations\DeliveryRegion;
 use App\Models\DeliveryLocations\DeliveryArea;
 use App\Models\Products\Product;
 use App\Models\Products\ProductCategory;
-use App\Enums\USER_ROLES;
+use App\Enums\UserRoles;
 use Carbon\Carbon;
 
 class Admin extends Component
 {
     public function render()
     {
-        $count_super_admins = User::where('role', USER_ROLES::SUPER_ADMIN)->count();
-        $count_admins = User::where('role', USER_ROLES::ADMIN)->count();
-        $count_users = User::where('role', !USER_ROLES::SUPER_ADMIN)->count();
+        $count_super_admins = User::where('role', UserRoles::SUPER_ADMIN)->count();
+        $count_admins = User::where('role', UserRoles::ADMIN)->count();
+        $count_users = User::where('role', !UserRoles::SUPER_ADMIN)->count();
 
         $count_messages = ContactMessage::count();
         $count_unread_messages = ContactMessage::where('is_read', false)->count();
