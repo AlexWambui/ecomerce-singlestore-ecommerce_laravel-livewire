@@ -9,7 +9,7 @@ use App\Livewire\Pages\General\Products\Categorized as ProductsCategorizedPage;
 use App\Livewire\Pages\General\Sales\Cart as CartPage;
 use App\Livewire\Pages\General\Sales\Checkout as Checkout;
 
-use App\Livewire\Pages\Dashboard\Index as Dashboard;
+use App\Livewire\Pages\Dashboards\Index as Dashboard;
 
 use App\Livewire\Pages\Users\Index as Users;
 use App\Livewire\Pages\Users\Form as CreateUser;
@@ -30,6 +30,7 @@ use App\Http\Controllers\Products\ProductCategoryController;
 use App\Livewire\Pages\Products\Products\Index as ProductsIndex;
 use App\Http\Controllers\Products\ProductController;
 use App\Http\Controllers\Products\ProductImageController;
+use App\Livewire\Pages\Orders\Index as OrdersIndex;
 
 Route::get('/', HomePage::class)->name('home-page');
 Route::get('contact', ContactPage::class)->name('contact-page');
@@ -85,6 +86,8 @@ Route::middleware(['admin_only'])->group(function () {
 
         Route::delete('product-images/{product_image}', [ProductImageController::class, 'destroy'])->name('product-images.destroy');
         Route::post('product-images/sort', [ProductImageController::class, 'sort'])->name('product-images.sort');
+
+        Route::get('orders', OrdersIndex::class)->name('orders.index');
     });
 });
 

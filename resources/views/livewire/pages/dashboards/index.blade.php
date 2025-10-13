@@ -6,6 +6,10 @@
     </section>
 
     @if(auth()->user()->isAdmin())
-        <livewire:pages.dashboard.admin />
+        <livewire:pages.dashboards.admin />
+    @elseif(auth()->user()->isCashier())
+        <livewire:pages.dashboards.cashier />
+    @elseif(auth()->user()->isCustomer())
+        <livewire:pages.dashboards.customer />
     @endif
 </div>
