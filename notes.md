@@ -324,7 +324,7 @@ orders {
     uuid('uuid')->unique();
     string('order_number');
     unsignedTInyInteger('order_status')->default(0);
-    unsignedTinyInteger('sale_type');
+    unsignedTinyInteger('order_type');
     decimal('production_cost', 10, 2)->default(0.00);
     decimal('total_amount', 10, 2)->default(0.00);
     decimal('amount_paid', 10, 2)->default(0.00);
@@ -345,7 +345,7 @@ order_items {
     decimal('production_cost',10,2)->default(0);
     decimal('selling_price',10,2)->default(0);
 
-    foreignId('sale_id')->constrained('sales')->cascadeOnDelete();
+    foreignId('order_id')->constrained('sales')->cascadeOnDelete();
     foreignId('product_id')->nullable()->constrained('products')->nullOnDelete();
     timestamps();
 }
@@ -356,22 +356,24 @@ order_deliveries {
     string('name');
     string('email');
     string('phone_number');
-    string('address');
-    string('additional_information')->nullalbe();
     string('region');
     string('area');
+    string('address');
+    string('additional_information')->nullalbe();
     decimal('shipping_cost');
     unsignedTinyInteger('delivery_status')->default(0);
 
-    foreignId('sale_id')->constrained('sales')->cascadeOnDelete();
+    foreignId('order_id')->constrained('orders')->cascadeOnDelete();
     timestamps();
 }
 
 payments {
     id();
     uuid('uuid')->unique();
-    unsignedTinyInteger('status')->default(0);
+    unsignedTinyInteger('payment_status')->default(0);
     unsignedTinyInteger('payment_method')->nullable();
+    decimal('amount', 10, 2)->nullable();
+    string('phone_number')->nullable();
     unsignedTinyInteger('response_code')->nullable();
     string('response_description')->nullable();
     string('merchant_request_id')->nullable();
@@ -379,7 +381,7 @@ payments {
     string('transaction_reference')->nullable();
     text('customer_message');
 
-    foreignId('sale_id')->constrained('sales')->cascadeOnDelete();
+    foreignId('order_id')->constrained('orders')->cascadeOnDelete();
     timestamps();
 }
 
@@ -389,7 +391,7 @@ sale_returns {
     unsignedTinyInteger('status'); // 0 = Requested, 1 = Approved, 2 = Rejected, 3 = Refunded
     string('reason');
 
-    foreignId('sale_id')->constrained()->onDelete('cascade');
+    foreignId('order_id')->constrained('orders')->onDelete('cascade');
     timestamps();
 }
 ```
