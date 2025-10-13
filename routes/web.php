@@ -23,6 +23,7 @@ use App\Http\Controllers\Blogs\BlogController;
 use App\Livewire\Pages\DeliveryLocations\Regions\Index as DeliveryRegionsIndex;
 use App\Livewire\Pages\DeliveryLocations\Regions\Form as CreateDeliveryRegion;
 use App\Livewire\Pages\DeliveryLocations\Regions\Form as EditDeliveryRegion;
+use App\Livewire\Pages\DeliveryLocations\Areas\Index as DeliveryAreasIndex;
 use App\Livewire\Pages\DeliveryLocations\Areas\Form as CreateDeliveryArea;
 use App\Livewire\Pages\DeliveryLocations\Areas\Form as EditDeliveryArea;
 use App\Livewire\Pages\Products\Categories\Index as ProductCategoriesIndex;
@@ -69,6 +70,7 @@ Route::middleware(['admin_only'])->group(function () {
         Route::get('delivery-regions/create', CreateDeliveryRegion::class)->name('delivery-regions.create');
         Route::get('delivery-regions/{delivery_region}/edit', EditDeliveryRegion::class)->name('delivery-regions.edit');
 
+        Route::get('delivery-areas', DeliveryAreasIndex::class)->name('delivery-areas.index');
         Route::get('delivery-areas/create/{region_uuid}', CreateDeliveryArea::class)->name('delivery-areas.create');
         Route::get('delivery-areas/{area_uuid}/edit', EditDeliveryArea::class)->name('delivery-areas.edit');
 

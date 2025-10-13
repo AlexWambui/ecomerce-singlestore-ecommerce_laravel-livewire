@@ -1,5 +1,5 @@
 <div class="Deliveries">
-    <div class="container DeliveryRegions">
+    <div class="container DeliveryLocations">
         <div class="breadcrumbs">
             <a href="{{ Route::has('delivery-areas.index') ? route('delivery-areas.index') : '#' }}" wire:navigate>Areas</a>
             <span>Regions</span>
