@@ -1,6 +1,6 @@
 <div class="ContactMessages">
     <div class="container">
-        <div class="header">
+        <div class="app_header">
             <div class="info">
                 <h2>Messages</h2>
                 <div class="stats">

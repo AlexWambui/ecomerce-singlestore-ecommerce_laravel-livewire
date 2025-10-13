@@ -56,7 +56,7 @@
                             'navigate' => true,
                         ],
                         [
-                            'route' => 'delivery-locations.index',
+                            'route' => 'delivery-regions.index',
                             'label' => 'Locations',
                             'can' => $user && $user->isAdmin(),
                             'navigate' => true,

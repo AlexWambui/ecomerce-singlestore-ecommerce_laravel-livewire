@@ -1,11 +1,15 @@
-<div class="DeliveryRegionsWithAreas">
-    <div class="container">
-        <div class="header">
+<div class="Deliveries">
+    <div class="container DeliveryRegions">
+        <div class="breadcrumbs">
+            <a href="{{ Route::has('delivery-areas.index') ? route('delivery-areas.index') : '#' }}" wire:navigate>Areas</a>
+            <span>Regions</span>
+        </div>
+
+        <div class="app_header">
             <div class="info">
                 <h2>Delivery Regions</h2>
                 <div class="stats">
                     <span>{{ $count_regions }} {{ Str::plural('region', $count_regions) }}</span>
-                    <span>{{ $count_areas }} {{ Str::plural('area', $count_areas) }}</span>
                 </div>
             </div>
 
@@ -13,7 +17,7 @@
                 <div class="relative">
                     <input
                         type="text"
-                        placeholder="Search by region or area name..."
+                        placeholder="Search by region name..."
                         wire:model="search"
                         wire:keydown.enter="performSearch"
                         class="pr-8"
@@ -30,65 +34,55 @@
             </div>
 
             <div class="button">
-                <a href="{{ Route::has('delivery-regions.create') ? route('delivery-regions.create') : '#' }}" class="btn" wire:navigate>
-                    Add Region
-                </a>
+                <a href="{{ Route::has('delivery-regions.create') ? route('delivery-regions.create') : '#' }}" class="btn">New Region</a>
             </div>
         </div>
 
-        <div class="regions_list space-y-6">
+        <div class="delivery_regions_list small_cards">
             @forelse($regions as $region)
-                <div class="region border rounded-lg p-4 shadow-sm">
-                    <div class="region_header flex justify-between items-center mb-2">
-                        <h3 class="text-lg font-bold">{{ $region->name }}</h3>
-                        <a href="{{ route('delivery-regions.edit', $region->uuid) }}" wire:navigate class="text-sm text-blue-600 hover:underline">
-                            Edit Region
-                        </a>
-                        <a
-                            href="{{ route('delivery-areas.create', ['region_uuid' => $region->uuid]) }}"
-                            class="btn btn_sm btn_secondary"
-                            wire:navigate
-                        >
-                            + Add Area
-                        </a>
+                <div class="card">
+                    <div class="details">
+                        <div class="info">
+                            <h3>{{ $region->name }}</h3>
+                            <span>{{ $count_areas }} {{ Str::plural('area', $count_areas) }}</span>
+                        </div>
                     </div>
 
-                    @if($region->areas->isNotEmpty())
-                        <div class="areas_table table overflow-x-auto">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th class="numbering">#</th>
-                                        <th>Area</th>
-                                        <th>Price</th>
-                                        <th class=" action">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($region->areas as $area)
-                                        <tr>
-                                            <td class="numbering">{{ $loop->iteration }}</td>
-                                            <td>{{ $area->name }}</td>
-                                            <td>Ksh {{ number_format($area->delivery_fee, 2) }}</td>
-                                            <td class="actions">
-                                                <div class="action">
-                                                    <a href="{{ route('delivery-areas.edit', $area->uuid) }}" wire:navigate>
-                                                        <x-svgs.edit class="text-green-600" />
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                    <div class="actions">
+                        <div class="crud">
+                            <a href="{{ Route::has('delivery-regions.edit') ? route('delivery-regions.edit', $region->id) : '#' }}" class="edit">
+                                <x-svgs.edit />
+                            </a>
+                            {{-- <button x-data
+                                x-on:click.prevent="$wire.set('delete_region_id', {{ $region->id }}); $dispatch('open-modal', 'confirm-region-deletion')"
+                                class="delete">
+                                <x-svgs.trash />
+                            </button> --}}
                         </div>
-                    @else
-                        <p class="text-sm text-gray-500">No areas defined for this region yet.</p>
-                    @endif
+                    </div>
                 </div>
             @empty
-                <p class="text-center text-gray-500">No regions available.</p>
+                <p>No regions found.</p>
             @endforelse
         </div>
     </div>
+
+    {{-- <x-modal name="confirm-region-deletion" :show="$delete_region_id !== null" focusable>
+        <div class="custom_form">
+            <form wire:submit="deleteLocation" @submit="$dispatch('close-modal', 'confirm-region-deletion')" class="p-6">
+                <h2 class="text-lg font-semibold text-gray-900">Confirm Deletion</h2>
+
+                <p class="mt-2 mb-4 text-sm text-gray-600">Are you sure you want to permanently delete this region and it's areas?</p>
+
+                <div class="mt-6 flex justify-start">
+                    <button type="button" class="mr-2" x-on:click="$dispatch('close-modal', 'confirm-region-deletion')">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn_danger">
+                        Delete Location
+                    </button>
+                </div>
+            </form>
+        </div>
+    </x-modal> --}}
 </div>

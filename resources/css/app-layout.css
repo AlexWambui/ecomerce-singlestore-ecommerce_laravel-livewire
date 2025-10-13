@@ -4,7 +4,7 @@
     .container {
         @apply min-w-full px-4 py-2 mx-auto;
 
-        .header {
+        .app_header {
             @apply grid grid-cols-1 md:grid-cols-3 items-center gap-2 py-4;
 
             .info {
@@ -100,3 +100,4 @@
 @import "./pages/Users.css";
 @import "./pages/Products.css";
 @import "./pages/ContactMessages.css";
+@import "./pages/Deliveries.css";

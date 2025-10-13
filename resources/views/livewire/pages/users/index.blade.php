@@ -1,6 +1,6 @@
 <div class="Users">
     <div class="container">
-        <div class="header">
+        <div class="app_header">
             <div class="info">
                 <h2>Users</h2>
                 <div class="stats">
