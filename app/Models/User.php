@@ -45,7 +45,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Get the attributes that should be cast.
+     * The attributes that should be cast.
      *
      * @return array<string, string>
      */
@@ -62,6 +62,9 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    /**
+     * Boot model events
+     */
     protected static function booted(): void
     {
         static::creating(function (User $user) {
@@ -108,29 +111,62 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getInitialsAttribute(): string
     {
-        return strtoupper(substr($this->first_name, 0, 1).substr($this->last_name, 0, 1));
+        return strtoupper(substr($this->first_name, 0, 1) . substr($this->last_name, 0, 1));
     }
 
+    /**
+     * Format a phone number like 2547xxxxxxx -> 07xx xxx xxx
+     */
+    protected function formatPhoneNumber(?string $number): ?string
+    {
+        if (empty($number)) {
+            return null;
+        }
+
+        // Strip non-digits
+        $cleaned = preg_replace('/\D/', '', $number);
+
+        // Convert international (2547..., 2541...) to local (07..., 01...)
+        if (str_starts_with($cleaned, '2547')) {
+            $local = '0' . substr($cleaned, 3);
+        } elseif (str_starts_with($cleaned, '2541')) {
+            $local = '0' . substr($cleaned, 3);
+        } elseif (str_starts_with($cleaned, '07') || str_starts_with($cleaned, '01')) {
+            $local = $cleaned; // already local
+        } else {
+            return $number; // fallback, return as is
+        }
+
+        // Format as 07xx xxx xxx
+        return preg_replace('/(\d{4})(\d{3})(\d{3})/', '$1 $2 $3', $local);
+    }
+
+    /**
+     * Accessor for formatted primary phone number
+     */
+    public function getPrimaryPhoneFormattedAttribute(): ?string
+    {
+        return $this->formatPhoneNumber($this->phone_number);
+    }
+
+    /**
+     * Accessor for formatted secondary phone number
+     */
+    public function getSecondaryPhoneFormattedAttribute(): ?string
+    {
+        return $this->formatPhoneNumber($this->secondary_phone_number);
+    }
+
+    /**
+     * Accessor combining both numbers (formatted)
+     */
     public function getPhoneNumbersAttribute(): string
     {
-        // $format_phone_number = function ($phone_number) {
-        //     if(!$phone_number || strlen($phone_number) !== 12 || !str_starts_with($phone_number, '254')) {
-        //         return $phone_number;
-        //     }
+        $phones = array_filter([
+            $this->primary_phone_formatted,
+            $this->secondary_phone_formatted,
+        ]);
 
-        //     $local = '0' . substr($phone_number, 3);
-        //     return substr($local, 0, 4) . ' ' . substr($local, 4, 3) . ' ' . substr($local, 7);
-        // };
-
-        // $phone_numbers = array_filter([
-        //     $this->phone_number,
-        //     $this->secondary_phone_number,
-        // ]);
-
-        // $formatted_phone_numbers = array_map($format_phone_number, $phone_numbers);
-
-        // return $formatted_phone_numbers ? implode(' | ', $formatted_phone_numbers) : '-';
-
-        return $this->secondary_phone_number ? "{$this->phone_number} | {$this->secondary_phone_number}" : "{$this->phone_number}";
+        return $phones ? implode(' | ', $phones) : '-';
     }
 }
