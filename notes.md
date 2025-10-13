@@ -1,3 +1,9 @@
+# TODOs
+- delivery regions delete.
+- delivery areas create.
+- delivery areas edit.
+- delivery areas delete.
+
 # User Stories
 General
 ~~- can update their profile information.~~
