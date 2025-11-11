@@ -1,7 +1,7 @@
 <div class="Deliveries">
     <div class="container DeliveryLocations">
         <div class="breadcrumbs">
-            <a href="{{ Route::has('delivery-locations.index') ? route('delivery-locations.index') : '#' }}" wire:navigate>Locations</a>
+            <a href="{{ Route::has('delivery-regions.index') ? route('delivery-regions.index') : '#' }}" wire:navigate>Regions</a>
             <span>Areas</span>
         </div>
 
