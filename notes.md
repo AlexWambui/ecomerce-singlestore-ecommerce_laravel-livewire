@@ -52,6 +52,7 @@ Users
 - Home
 - Shop
 - About
+- Blogs
 - Contact
 
 - Users
